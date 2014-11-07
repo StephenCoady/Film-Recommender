@@ -12,7 +12,7 @@ public class Film
 	private String title;
 	private String year;
 	private String genre;
-	private BufferedImage filmImage;
+	private String imagePath;
 	
 	public Film(int ID, String title, String year, String genre)
 	{
@@ -20,11 +20,7 @@ public class Film
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
-		try {
-			this.setFilmImage(selectInitialImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.imagePath = "src/images/no_image_available.jpg";
 	}
 
 	public int getID() {
@@ -65,14 +61,20 @@ public class Film
 		return firstImage;
 	}
 
-	public BufferedImage getFilmImage() 
-	{
-		return filmImage;
+	@Override
+	public String toString() {
+		return "Film [ID=" + ID + ", title=" + title + ", year=" + year
+				+ ", genre=" + genre + "]";
 	}
-
-	public void setFilmImage(BufferedImage filmImage) 
+	
+	public String getFilmImage()
 	{
-		this.filmImage = filmImage;
+		return imagePath;
+	}
+	
+	public void setFilmImage(String imagePath) 
+	{
+		this.imagePath = imagePath;
 	}
 	
 }

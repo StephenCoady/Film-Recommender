@@ -1,5 +1,7 @@
 package rating_system;
 
+import java.util.ArrayList;
+
 public class Member 
 {
 	private String firstName;
@@ -7,6 +9,7 @@ public class Member
 	private String accountName;
 	private String password;
 	private boolean loggedIn;
+	private ArrayList<Rating> ratings;
 	
 	public Member(String firstName, String secondName, String accountName, String password)
 	{
@@ -14,6 +17,17 @@ public class Member
 		this.secondName = secondName;
 		this.accountName = accountName;
 		this.password = password;
+		this.ratings = new ArrayList<Rating>();
+	}
+
+	public ArrayList<Rating> getRatings() 
+	{
+		return ratings;
+	}
+
+	public void setRatings(ArrayList<Rating> ratings) 
+	{
+		this.ratings = ratings;
 	}
 
 	public String getFirstName() 
