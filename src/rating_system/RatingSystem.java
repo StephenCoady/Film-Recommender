@@ -39,11 +39,13 @@ public class RatingSystem
 	private void run() throws IOException
 	{
 		loadFilms();
-		saveFilms();
+		
 		for(int i = 0; i<films.size();i++)
 		{
 			StdOut.println(films.get(i).getID() + ": " + films.get(i).getTitle());
+			StdOut.println(films.get(i).getFilmImage());
 		}
+		saveFilms();
 	}
 	
 	public void loadMembers()
@@ -73,7 +75,10 @@ public class RatingSystem
 				String title = (String) newArray.get(1);
 				String year = (String) newArray.get(2);
 				String genre = (String) newArray.get(3);
+				String imageLocation = (String) newArray.get(4);
+				
 				Film film = new Film(ID, title, year, genre);
+				film.setFilmImage(imageLocation);
 				films.add(film);
 			}
 			StdOut.println("Number of films loaded: " + films.size());
@@ -99,7 +104,8 @@ public class RatingSystem
 			newFilm.add(films.get(i).getTitle());
 			newFilm.add(films.get(i).getYear());
 			newFilm.add(films.get(i).getGenre());
-
+			newFilm.add(films.get(i).getFilmImage());
+			
 			obj.put(films.get(i).getID(), newFilm);
 		}
 		FileWriter file = new FileWriter("src/files/films.json");
