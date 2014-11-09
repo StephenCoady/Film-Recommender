@@ -1,6 +1,6 @@
 package rating_system;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Member 
 {
@@ -9,7 +9,7 @@ public class Member
 	private String accountName;
 	private String password;
 	private boolean loggedIn;
-	private ArrayList<Rating> ratings;
+	private HashMap<Integer, Rating> ratings;
 	
 	public Member(String firstName, String secondName, String accountName, String password)
 	{
@@ -17,17 +17,12 @@ public class Member
 		this.secondName = secondName;
 		this.accountName = accountName;
 		this.password = password;
-		this.ratings = new ArrayList<Rating>();
+		this.ratings = new HashMap<Integer, Rating>();
 	}
 
-	public ArrayList<Rating> getRatings() 
+	public HashMap<Integer, Rating> getRatings() 
 	{
 		return ratings;
-	}
-
-	public void setRatings(ArrayList<Rating> ratings) 
-	{
-		this.ratings = ratings;
 	}
 
 	public String getFirstName() 
