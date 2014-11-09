@@ -12,7 +12,7 @@ public class Rating
 		this.film = film;
 		this.accountName = accountName;
 	}
-
+	
 	public int getRating() {
 		return rating;
 	}

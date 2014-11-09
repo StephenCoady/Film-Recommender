@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.princeton.cs.introcs.Picture;
 import edu.princeton.cs.introcs.StdOut;
@@ -39,23 +41,82 @@ public class RatingSystem
 	private void run() throws IOException
 	{
 		loadFilms();
-		
-		for(int i = 0; i<films.size();i++)
-		{
-			StdOut.println(films.get(i).getID() + ": " + films.get(i).getTitle());
-			StdOut.println(films.get(i).getFilmImage());
-		}
 		saveFilms();
+		loadMembers();
+		saveMembers();
 	}
 	
 	public void loadMembers()
 	{
-		
+		JSONParser parser = new JSONParser();
+
+		try {
+			
+			Object obj = parser.parse(new FileReader("src/files/members.json"));
+			JSONObject jsonObject = (JSONObject) obj;
+			for (int i = 1; i < jsonObject.size()+1; i++)
+			{
+				ArrayList<?> newArray = (ArrayList<?>) jsonObject.get(Integer.toString(i));
+				String obj2  = (String) newArray.get(0); // username
+				String obj3  = (String) newArray.get(1); // firstname
+				String obj4  = (String) newArray.get(2); // secondname
+				String obj5  = (String) newArray.get(3); // password
+				
+				Member newMember = new Member(obj3, obj4, obj2, obj5);
+				members.add(newMember);
+//				JSONObject jsonObject2 = (JSONObject) obj2;
+//				for(int j = 1; j<films.size()+1; j++)
+//				{
+//					if(jsonObject2.containsKey(Integer.toString(j)))
+//					{
+//						StdOut.println(j + ": " + jsonObject2.get(Integer.toString(j)));
+//					}
+//				}
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void saveMembers()
+	@SuppressWarnings("unchecked")
+	public void saveMembers() throws IOException
 	{
+		JSONObject obj = new JSONObject();
+
+		for(int i = 0; i <members.size(); i++)
+		{
+			JSONArray newMember = new JSONArray();
+			newMember.add(members.get(i).getAccountName());
+			newMember.add(members.get(i).getFirstName());
+			newMember.add(members.get(i).getSecondName());
+			newMember.add(members.get(i).getPassword());
+			
+			Map <Integer, Integer> hm = new HashMap<Integer, Integer>();
+			hm.put(1, 2);
+			hm.put(50, 4);
+			hm.put(55, 97);
+			hm.put(58, 46);
+			
+			newMember.add(hm);
+			obj.put(i+1, newMember);
+		}
 		
+		FileWriter file = new FileWriter("src/files/testing.json");
+		try {
+			file.write(obj.toJSONString());
+			StdOut.println("Number of members saved: " + obj.size());
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} finally {
+			file.flush();
+			file.close();
+		}
 	}
 
 	public void loadFilms()
