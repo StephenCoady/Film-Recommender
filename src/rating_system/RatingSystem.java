@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import edu.princeton.cs.introcs.Picture;
 import edu.princeton.cs.introcs.StdOut;
@@ -43,9 +44,10 @@ public class RatingSystem
 	{
 		loadFilms();
 		loadMembers();
+		setUpRatings();
 		saveFilms();
 		saveMembers();
-		
+		StdOut.println(ratings.size());
 	}
 
 	public void loadMembers()
@@ -118,7 +120,7 @@ public class RatingSystem
 			obj.put(i+1, newMember);
 		}
 
-		FileWriter file = new FileWriter("src/files/members.json");
+		FileWriter file = new FileWriter("src/files/testing.json");
 		try {
 			file.write(obj.toJSONString());
 			StdOut.println("Number of members saved: " + obj.size());
@@ -213,11 +215,34 @@ public class RatingSystem
 		films.add(newFilm);
 	}
 
+	//getting a lot of out of bounds
+	//and also ratings hashmap is excluding duplicates, no good for what i want it for
 	public void setUpRatings()
 	{
+		Random rand = new Random();
+		ratings.clear();
+		int[] array;
+		array = new int[6];
+		array[0] = -5;
+		array[1] = -3;
+		array[2] = -1;
+		array[3] = 1;
+		array[4] = 3;
+		array[5] = 5;
+		for(Member member: members)
+		{
+			member.getRatings().clear();
+			for(int i = 0; i < 20; i++)
+			{
+				int randomKey = rand.nextInt(films.size()+1);
+				int random = rand.nextInt(5);
+				int randomRating = array[random];
+				Rating rating = new Rating(randomRating, films.get(randomKey),member);
+				member.getRatings().put(randomKey, rating);
+				ratings.put(randomKey, randomRating);
+			}
+		}
 
-		
-		
 	}
 
 	//currently taking in a string username but eventually needs to be changed 
