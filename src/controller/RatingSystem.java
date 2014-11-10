@@ -1,5 +1,5 @@
-package rating_system;
-
+package controller;
+ 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,6 +18,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+
+import model.Film;
+import model.Member;
+import model.Rating;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -55,7 +59,7 @@ public class RatingSystem
 		JSONParser parser = new JSONParser();
 
 		try {
-
+			
 			Object obj = parser.parse(new FileReader("src/files/members.json"));
 			JSONObject jsonObject = (JSONObject) obj;
 			for (int i = 0; i < jsonObject.size(); i++)
@@ -69,6 +73,7 @@ public class RatingSystem
 				Member newMember = new Member(obj3, obj4, obj2, obj5);
 				members.add(newMember);
 
+				//deals with the member's ratings
 				Object keyArray = newArray.get(4);
 				JSONObject jsonObject2 = (JSONObject) keyArray;
 				for(int j = 0; j<films.size();j++)
@@ -115,7 +120,6 @@ public class RatingSystem
 					hm.put(j, rate);
 				}
 			}
-
 			newMember.add(hm);
 			obj.put(i, newMember);
 		}
@@ -224,6 +228,11 @@ public class RatingSystem
 		Rating newRating = new Rating(rating, film, member);
 		member.getRatings().put(ID, newRating);
 	}
+	
+	public void calculateRatings(int ID, int rating)
+	{
+		
+	}
 
 	//ratings hashmap is excluding duplicates, no good for what i want it for
 	public void randomiseRatings()
@@ -254,7 +263,7 @@ public class RatingSystem
 
 	}
 
-	//purely for setting up members from csv file, shoul only be used once
+	//purely for setting up members from csv file, should only be used once
 	public void setUpMembers() throws IOException
 	{
 		CSVReader reader = new CSVReader(new FileReader("src/files/membersSetup.csv"));

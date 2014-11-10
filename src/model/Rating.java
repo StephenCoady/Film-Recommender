@@ -1,4 +1,4 @@
-package rating_system;
+package model;
 
 public class Rating 
 {

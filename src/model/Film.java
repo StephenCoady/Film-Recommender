@@ -1,4 +1,4 @@
-package rating_system;
+package model;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
