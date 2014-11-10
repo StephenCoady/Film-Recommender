@@ -24,6 +24,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import au.com.bytecode.opencsv.CSVReader;
+
 import com.google.gson.Gson;
 
 
@@ -44,10 +46,8 @@ public class RatingSystem
 	{
 		loadFilms();
 		loadMembers();
-		setUpRatings();
 		saveFilms();
 		saveMembers();
-		StdOut.println(ratings.size());
 	}
 
 	public void loadMembers()
@@ -58,7 +58,7 @@ public class RatingSystem
 
 			Object obj = parser.parse(new FileReader("src/files/members.json"));
 			JSONObject jsonObject = (JSONObject) obj;
-			for (int i = 1; i < jsonObject.size()+1; i++)
+			for (int i = 0; i < jsonObject.size(); i++)
 			{
 				ArrayList<?> newArray = (ArrayList<?>) jsonObject.get(Integer.toString(i));
 				String obj2  = (String) newArray.get(0); // username
@@ -71,13 +71,13 @@ public class RatingSystem
 
 				Object keyArray = newArray.get(4);
 				JSONObject jsonObject2 = (JSONObject) keyArray;
-				for(int j = 1; j<films.size();j++)
+				for(int j = 0; j<films.size();j++)
 				{
 					if(jsonObject2.get(Integer.toString(j))!=null)
 					{
 						String string = jsonObject2.get(Integer.toString(j)).toString();
 						int rating = Integer.parseInt(string);
-						newRating(obj2, films.get(j-1), rating);
+						newRating(members.indexOf(newMember), films.get(j), rating);
 					}
 				}
 
@@ -117,10 +117,10 @@ public class RatingSystem
 			}
 
 			newMember.add(hm);
-			obj.put(i+1, newMember);
+			obj.put(i, newMember);
 		}
 
-		FileWriter file = new FileWriter("src/files/testing.json");
+		FileWriter file = new FileWriter("src/files/members.json");
 		try {
 			file.write(obj.toJSONString());
 			StdOut.println("Number of members saved: " + obj.size());
@@ -141,7 +141,7 @@ public class RatingSystem
 
 			Object obj = parser.parse(new FileReader("src/files/films.json"));
 			JSONObject jsonObject = (JSONObject) obj;
-			for (int i = 1; i < jsonObject.size()+1; i++)
+			for (int i = 0; i < jsonObject.size(); i++)
 			{
 				ArrayList<?> newArray = (ArrayList<?>) jsonObject.get(Integer.toString(i));
 				Object obj2  = newArray.get(0);
@@ -209,15 +209,24 @@ public class RatingSystem
 		}
 	}
 
-	public void newFilm(String name, String year, String genre) throws IOException
+	public void newFilm(String name, String year, String genre)
 	{
-		Film newFilm = new Film(films.size()+1, name, year, genre);
+		Film newFilm = new Film(films.size(), name, year, genre);
 		films.add(newFilm);
 	}
 
-	//getting a lot of out of bounds
-	//and also ratings hashmap is excluding duplicates, no good for what i want it for
-	public void setUpRatings()
+	public void newRating(int userID, Film film, int rating)
+	{
+		int ID = film.getID();
+		ratings.put(ID, rating);
+
+		Member member = members.get(userID);
+		Rating newRating = new Rating(rating, film, member);
+		member.getRatings().put(ID, newRating);
+	}
+
+	//ratings hashmap is excluding duplicates, no good for what i want it for
+	public void randomiseRatings()
 	{
 		Random rand = new Random();
 		ratings.clear();
@@ -234,10 +243,10 @@ public class RatingSystem
 			member.getRatings().clear();
 			for(int i = 0; i < 20; i++)
 			{
-				int randomKey = rand.nextInt(films.size()+1);
+				int randomKey = rand.nextInt(films.size());
 				int random = rand.nextInt(5);
 				int randomRating = array[random];
-				Rating rating = new Rating(randomRating, films.get(randomKey),member);
+				Rating rating = new Rating(randomRating, films.get(randomKey), member);
 				member.getRatings().put(randomKey, rating);
 				ratings.put(randomKey, randomRating);
 			}
@@ -245,22 +254,25 @@ public class RatingSystem
 
 	}
 
-	//currently taking in a string username but eventually needs to be changed 
-	//to take in logged in user, this will simplify it
-	public void newRating(String accountName, Film film, int rating)
+	//purely for setting up members from csv file, shoul only be used once
+	public void setUpMembers() throws IOException
 	{
-		int ID = film.getID();
-		ratings.put(ID, rating);
-
-		for(int i = 0; i<members.size();i++)
-		{
-			if(members.get(i).getAccountName().equals(accountName))
+		CSVReader reader = new CSVReader(new FileReader("src/files/membersSetup.csv"));
+		try {
+			String [] nextLine;
+			while ((nextLine = reader.readNext()) != null) 
 			{
-				Rating newRating = new Rating(rating, film, members.get(i));
-				int size = members.get(i).getRatings().size();
-				members.get(i).getRatings().put(ID, newRating);
-				break;
+				// nextLine[] is an array of values from the line
+				String username = nextLine[0];
+				String firstName = nextLine[1];
+				String secondName = nextLine[2];
+				String password = nextLine[3];
+				Member member = new Member(firstName, secondName, username, password);
+				members.add(member);
 			}
+		}
+		finally {
+			reader.close();
 		}
 	}
 }

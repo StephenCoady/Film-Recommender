@@ -4,13 +4,13 @@ public class Rating
 {
 	private int rating;
 	private Film film;
-	private Member accountName;
+	private Member member;
 	
-	public Rating(int rating, Film film, Member accountName)
+	public Rating(int rating, Film film, Member member)
 	{
 		this.rating = rating;
 		this.film = film;
-		this.accountName = accountName;
+		this.member = member;
 	}
 	
 	public int getRating() {
@@ -29,13 +29,13 @@ public class Rating
 		this.film = film;
 	}
 
-	public Member getAccountName() {
-		return accountName;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setAccountName(Member accountName) 
+	public void setMember(Member member) 
 	{
-		this.accountName = accountName;
+		this.member = member;
 	}
 
 }
