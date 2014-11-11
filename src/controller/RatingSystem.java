@@ -48,16 +48,18 @@ public class RatingSystem
 
 	private void run() throws IOException
 	{
+		double timeStart = System.currentTimeMillis();
 		loadFilms();
 		loadMembers();
 		saveFilms();
 		saveMembers();
+		double timeStop = System.currentTimeMillis();
+		StdOut.println("Total running time: " + ((timeStop - timeStart)/1000) + " seconds");
 	}
 
 	public void loadMembers()
 	{
 		JSONParser parser = new JSONParser();
-
 		try {
 
 			Object obj = parser.parse(new FileReader("src/files/members.json"));
@@ -87,7 +89,7 @@ public class RatingSystem
 				}
 
 			}
-			StdOut.println("Number of members loaded: " + members.size());
+			//StdOut.println("Number of members loaded: " + members.size());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -127,7 +129,7 @@ public class RatingSystem
 		FileWriter file = new FileWriter("src/files/members.json");
 		try {
 			file.write(obj.toJSONString());
-			StdOut.println("Number of members saved: " + obj.size());
+			//StdOut.println("Number of members saved: " + obj.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 
@@ -140,7 +142,6 @@ public class RatingSystem
 	public void loadFilms()
 	{
 		JSONParser parser = new JSONParser();
-
 		try {
 
 			Object obj = parser.parse(new FileReader("src/files/films.json"));
@@ -160,7 +161,7 @@ public class RatingSystem
 				film.setFilmImage(imageLocation);
 				films.add(film);
 			}
-			StdOut.println("Number of films loaded: " + films.size());
+			//StdOut.println("Number of films loaded: " + films.size());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -190,7 +191,7 @@ public class RatingSystem
 		FileWriter file = new FileWriter("src/files/films.json");
 		try {
 			file.write(obj.toJSONString());
-			StdOut.println("Number of films saved: " + obj.size());
+			//StdOut.println("Number of films saved: " + obj.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 
@@ -221,17 +222,25 @@ public class RatingSystem
 
 	public void newRating(int userID, Film film, int rating)
 	{
-		int ID = film.getID();
-		film.addRating(rating);
-		ratings.put(ID, film.getAverageRating());
-		
 		Member member = members.get(userID);
-		Rating newRating = new Rating(rating, film, member);
-		member.getRatings().put(ID, newRating);
+		int ID = film.getID();
+		if(!member.getRatings().containsKey(ID))
+		{
+			film.addRating(rating);
+			ratings.put(ID, film.getSumOfRatings());
+			Rating newRating = new Rating(rating, film, member);
+			member.getRatings().put(ID, newRating);
+		}
+		else
+		{
+			film.subtractRating(member.getRatings().get(ID).getRating());
+			film.addRating(rating);
+			ratings.put(ID, film.getSumOfRatings());
+			Rating newRating = new Rating(rating, film, member);
+			member.getRatings().put(ID, newRating);
+		}
 	}
 
-	
-	//ratings hashmap is excluding duplicates, no good for what i want it for
 	public void randomiseRatings()
 	{
 		Random rand = new Random();
@@ -255,7 +264,7 @@ public class RatingSystem
 				member.getRatings().put(randomKey, rating);
 				Film film = films.get(randomKey);
 				film.addRating(randomRating);
-				ratings.put(film.getID(), film.getAverageRating());
+				ratings.put(film.getID(), film.getSumOfRatings());
 			}
 		}
 

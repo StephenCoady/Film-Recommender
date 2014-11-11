@@ -33,6 +33,12 @@ public class Film
 		this.numberOfRatings++;
 	}
 	
+	public void subtractRating(int rating)
+	{
+		this.sumOfRatings -= rating;
+		this.numberOfRatings--;
+	}
+	
 	public double getSumOfRatings()
 	{
 		return sumOfRatings;
