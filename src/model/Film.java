@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
 public class Film 
 {
 	private int ID;
@@ -13,7 +14,10 @@ public class Film
 	private String year;
 	private String genre;
 	private String imagePath;
+	private double sumOfRatings = 0;
+	private double numberOfRatings = 0;
 	
+
 	public Film(int ID, String title, String year, String genre)
 	{
 		this.ID = ID;
@@ -23,6 +27,26 @@ public class Film
 		this.imagePath = "src/images/no_image_available.jpg";
 	}
 
+	public void addRating(int rating)
+	{
+		this.sumOfRatings += rating;
+		this.numberOfRatings++;
+	}
+	
+	public double getSumOfRatings()
+	{
+		return sumOfRatings;
+	}
+	
+	public double getNumberOfRatings() {
+		return numberOfRatings;
+	}
+	
+	public double getAverageRating()
+	{
+		return (double) (sumOfRatings/numberOfRatings);
+	}
+	
 	public int getID() {
 		return ID;
 	}

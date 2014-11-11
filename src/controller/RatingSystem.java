@@ -1,5 +1,5 @@
 package controller;
- 
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -38,7 +38,7 @@ public class RatingSystem
 {
 	ArrayList<Member> members = new ArrayList<Member>();
 	ArrayList<Film> films = new ArrayList<Film>();
-	HashMap<Integer, Integer> ratings = new HashMap<Integer, Integer>();
+	HashMap<Integer, Double> ratings = new HashMap<Integer, Double>();
 
 	public static void main(String[] args) throws IOException
 	{
@@ -59,7 +59,7 @@ public class RatingSystem
 		JSONParser parser = new JSONParser();
 
 		try {
-			
+
 			Object obj = parser.parse(new FileReader("src/files/members.json"));
 			JSONObject jsonObject = (JSONObject) obj;
 			for (int i = 0; i < jsonObject.size(); i++)
@@ -222,31 +222,27 @@ public class RatingSystem
 	public void newRating(int userID, Film film, int rating)
 	{
 		int ID = film.getID();
-		ratings.put(ID, rating);
-
+		film.addRating(rating);
+		ratings.put(ID, film.getAverageRating());
+		
 		Member member = members.get(userID);
 		Rating newRating = new Rating(rating, film, member);
 		member.getRatings().put(ID, newRating);
 	}
-	
-	public void calculateRatings(int ID, int rating)
-	{
-		
-	}
 
+	
 	//ratings hashmap is excluding duplicates, no good for what i want it for
 	public void randomiseRatings()
 	{
 		Random rand = new Random();
 		ratings.clear();
 		int[] array;
-		array = new int[6];
+		array = new int[5];
 		array[0] = -5;
 		array[1] = -3;
-		array[2] = -1;
-		array[3] = 1;
-		array[4] = 3;
-		array[5] = 5;
+		array[2] = 1;
+		array[3] = 3;
+		array[4] = 5;
 		for(Member member: members)
 		{
 			member.getRatings().clear();
@@ -257,7 +253,9 @@ public class RatingSystem
 				int randomRating = array[random];
 				Rating rating = new Rating(randomRating, films.get(randomKey), member);
 				member.getRatings().put(randomKey, rating);
-				ratings.put(randomKey, randomRating);
+				Film film = films.get(randomKey);
+				film.addRating(randomRating);
+				ratings.put(film.getID(), film.getAverageRating());
 			}
 		}
 
