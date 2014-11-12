@@ -23,6 +23,7 @@ import model.Film;
 import model.Member;
 import model.Rating;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -55,6 +56,7 @@ public class RatingSystem
 		double timeStart = System.currentTimeMillis();
 		loadFilms();
 		loadMembers();
+		
 		saveFilms();
 		saveMembers();
 		double timeStop = System.currentTimeMillis();
@@ -91,7 +93,6 @@ public class RatingSystem
 						InitialNewRating(members.indexOf(newMember), films.get(j), rating);
 					}
 				}
-
 			}
 			//StdOut.println("Number of members loaded: " + members.size());
 		} catch (FileNotFoundException e) {
@@ -101,6 +102,7 @@ public class RatingSystem
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		backupMembers();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -174,6 +176,7 @@ public class RatingSystem
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		backUpFilms();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -309,6 +312,27 @@ public class RatingSystem
 
 	}
 
+	public void backUpFilms()
+	{
+		File source = new File("src/files/films.json");
+		File dest = new File("src/backup/films.json");
+		try {
+		    FileUtils.copyFile(source, dest);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
+	
+	public void backupMembers()
+	{
+		File membersSource = new File("src/files/members.json");
+		File membersDest = new File("src/backup/members.json");
+		try {
+		    FileUtils.copyFile(membersSource, membersDest);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
 	public void deleteAllRatings()
 	{
 		for(Member member: members)
