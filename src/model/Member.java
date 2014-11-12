@@ -81,6 +81,13 @@ public class Member
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Member [firstName=" + firstName + ", secondName=" + secondName
+				+ ", accountName=" + accountName + ", password=" + password
+				+ ", loggedIn=" + loggedIn + ", number of ratings: " + ratings.size() +"]";
+	}
+
 	public boolean isLoggedIn() 
 	{
 		return loggedIn;

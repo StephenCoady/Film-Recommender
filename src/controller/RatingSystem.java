@@ -36,10 +36,14 @@ import com.google.gson.Gson;
 @SuppressWarnings("unused")
 public class RatingSystem 
 {
-	ArrayList<Member> members = new ArrayList<Member>();
-	ArrayList<Film> films = new ArrayList<Film>();
-	HashMap<Integer, Double> ratings = new HashMap<Integer, Double>();
+	private ArrayList<Member> members = new ArrayList<Member>();
+	private ArrayList<Film> films = new ArrayList<Film>();
+	private HashMap<Integer, Double> ratings = new HashMap<Integer, Double>();
+	private Member loggedIn;
+	private String loadMembersLocation;
+	private String loadFilmsLocation;
 
+	
 	public static void main(String[] args) throws IOException
 	{
 		RatingSystem system = new RatingSystem();
@@ -84,7 +88,7 @@ public class RatingSystem
 					{
 						String string = jsonObject2.get(Integer.toString(j)).toString();
 						int rating = Integer.parseInt(string);
-						newRating(members.indexOf(newMember), films.get(j), rating);
+						InitialNewRating(members.indexOf(newMember), films.get(j), rating);
 					}
 				}
 
@@ -201,26 +205,21 @@ public class RatingSystem
 		}
 	}
 
-	public void newMember(String firstName, String secondName, String accountName, String password, String passwordAgain)
+	public void newMember(String firstName, String secondName, String accountName, String password) throws IOException
 	{
-		if(password.equals(passwordAgain))
-		{
-			Member newMember = new Member(firstName, secondName, accountName, password);
-			members.add(newMember);
-		}
-		else
-		{
-			// TODO add in method if password check fails
-		}
+		Member newMember = new Member(firstName, secondName, accountName, password);
+		members.add(newMember);
+		saveMembers();
 	}
 
-	public void newFilm(String name, String year, String genre)
+	public void newFilm(String name, String year, String genre) throws IOException
 	{
 		Film newFilm = new Film(films.size(), name, year, genre);
 		films.add(newFilm);
+		saveFilms();
 	}
 
-	public void newRating(int userID, Film film, int rating)
+	public void InitialNewRating(int userID, Film film, int rating) throws IOException
 	{
 		Member member = members.get(userID);
 		int ID = film.getID();
@@ -242,7 +241,45 @@ public class RatingSystem
 			member.getRatings().put(ID, newRating);
 		}
 	}
+	
+	public void newRating(int userID, Film film, int rating) throws IOException
+	{
+		Member member = members.get(userID);
+		int ID = film.getID();
+		if(!member.getRatings().containsKey(ID))
+		{
+			film.addRating(rating);
+			ratings.put(ID, film.getSumOfRatings());
+			Rating newRating = new Rating(rating, film, member);
+			member.getRatings().put(ID, newRating);
+		}
+		//if the member has already rated this film, their previous rating 
+		//will not be reflected in that films total ratings
+		else
+		{
+			film.subtractRating(member.getRatings().get(ID).getRating());
+			film.addRating(rating);
+			ratings.put(ID, film.getSumOfRatings());
+			Rating newRating = new Rating(rating, film, member);
+			member.getRatings().put(ID, newRating);
+		}
+		saveMembers();
+	}
 
+	public void logIn(String userName, String password)
+	{
+		for(int i = 0; i<members.size();i++)
+		{
+			if (members.get(i).getAccountName().equals(userName) 
+					&& members.get(i).getPassword().equals(password) )
+			{
+				loggedIn = members.get(i);
+				members.get(i).setLoggedIn(true);
+				break;
+			}
+		}
+	}
+	
 	public void randomiseRatings()
 	{
 		Random rand = new Random();
