@@ -231,6 +231,8 @@ public class RatingSystem
 			Rating newRating = new Rating(rating, film, member);
 			member.getRatings().put(ID, newRating);
 		}
+		//if the member has already rated this film, their previous rating 
+		//will not be reflected in that films total ratings
 		else
 		{
 			film.subtractRating(member.getRatings().get(ID).getRating());
@@ -270,6 +272,15 @@ public class RatingSystem
 
 	}
 
+	public void deleteAllRatings()
+	{
+		for(Member member: members)
+		{
+			ratings.clear();
+			member.getRatings().clear();
+		}
+	}
+	
 	//purely for setting up members from csv file, should only be used once
 	public void setUpMembers() throws IOException
 	{
