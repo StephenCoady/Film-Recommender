@@ -32,6 +32,8 @@ import org.json.simple.parser.ParseException;
 import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonParseException;
 
 
 @SuppressWarnings("unused")
@@ -41,9 +43,10 @@ public class RatingSystem
 	private ArrayList<Film> films = new ArrayList<Film>();
 	private HashMap<Integer, Double> ratings = new HashMap<Integer, Double>();
 	private Member loggedIn;
-	private String loadMembersLocation;
-	private String loadFilmsLocation;
-
+	private String loadMembersLocation = "src/files/members.json";
+	private String loadFilmsLocation = "src/files/films.json";
+	private String loadBackupMembersLocation = "src/backup/members.json";
+	private String loadBackupFilmsLocation = "src/backup/films.json";
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -68,7 +71,7 @@ public class RatingSystem
 		JSONParser parser = new JSONParser();
 		try {
 
-			Object obj = parser.parse(new FileReader("src/files/members.json"));
+			Object obj = parser.parse(new FileReader(loadMembersLocation));
 			JSONObject jsonObject = (JSONObject) obj;
 			for (int i = 0; i < jsonObject.size(); i++)
 			{
@@ -96,11 +99,17 @@ public class RatingSystem
 			}
 			//StdOut.println("Number of members loaded: " + members.size());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			this.loadMembersLocation = "src/backup/members.json";
+			this.loadBackupMembersLocation = "src/files/members.json";
+			loadMembers();
 		} catch (IOException e) {
-			e.printStackTrace();
+			this.loadMembersLocation = "src/backup/members.json";
+			this.loadBackupMembersLocation = "src/files/members.json";
+			loadMembers();
 		} catch (ParseException e) {
-			e.printStackTrace();
+			this.loadMembersLocation = "src/backup/members.json";
+			this.loadBackupMembersLocation = "src/files/members.json";
+			loadMembers();
 		}
 		backupMembers();
 	}
@@ -118,8 +127,8 @@ public class RatingSystem
 			newMember.add(member.getFirstName());
 			newMember.add(member.getSecondName());
 			newMember.add(member.getPassword());
+			
 			Map <Integer, Integer> hm = new HashMap<Integer, Integer>();
-
 			for (int j = 0; j < films.size(); j++)
 			{
 				if(member.getRatings().containsKey(j))
@@ -138,7 +147,6 @@ public class RatingSystem
 			//StdOut.println("Number of members saved: " + obj.size());
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		} finally {
 			file.flush();
 			file.close();
@@ -150,7 +158,7 @@ public class RatingSystem
 		JSONParser parser = new JSONParser();
 		try {
 
-			Object obj = parser.parse(new FileReader("src/files/films.json"));
+			Object obj = parser.parse(new FileReader(loadFilmsLocation));
 			JSONObject jsonObject = (JSONObject) obj;
 			for (int i = 0; i < jsonObject.size(); i++)
 			{
@@ -167,14 +175,18 @@ public class RatingSystem
 				film.setFilmImage(imageLocation);
 				films.add(film);
 			}
-			//StdOut.println("Number of films loaded: " + films.size());
-
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			this.loadFilmsLocation = "src/backup/films.json";
+			this.loadBackupFilmsLocation = "src/files/films.json";
+			loadFilms();
 		} catch (IOException e) {
-			e.printStackTrace();
+			this.loadFilmsLocation = "src/backup/films.json";
+			this.loadBackupFilmsLocation = "src/files/films.json";
+			loadFilms();
 		} catch (ParseException e) {
-			e.printStackTrace();
+			this.loadFilmsLocation = "src/backup/films.json";
+			this.loadBackupFilmsLocation = "src/files/films.json";
+			loadFilms();
 		}
 		backUpFilms();
 	}
@@ -233,8 +245,10 @@ public class RatingSystem
 			Rating newRating = new Rating(rating, film, member);
 			member.getRatings().put(ID, newRating);
 		}
-		//if the member has already rated this film, their previous rating 
-		//will not be reflected in that films total ratings
+		/*
+		 * if the member has already rated this film, their previous rating 
+		 * will not be reflected in that films total ratings
+		 */
 		else
 		{
 			film.subtractRating(member.getRatings().get(ID).getRating());
@@ -314,8 +328,8 @@ public class RatingSystem
 
 	public void backUpFilms()
 	{
-		File source = new File("src/files/films.json");
-		File dest = new File("src/backup/films.json");
+		File source = new File(loadFilmsLocation);
+		File dest = new File(loadBackupFilmsLocation);
 		try {
 		    FileUtils.copyFile(source, dest);
 		} catch (IOException e) {
@@ -325,8 +339,8 @@ public class RatingSystem
 	
 	public void backupMembers()
 	{
-		File membersSource = new File("src/files/members.json");
-		File membersDest = new File("src/backup/members.json");
+		File membersSource = new File(loadMembersLocation);
+		File membersDest = new File(loadBackupMembersLocation);
 		try {
 		    FileUtils.copyFile(membersSource, membersDest);
 		} catch (IOException e) {
