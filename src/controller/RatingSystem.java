@@ -1,22 +1,40 @@
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import edu.princeton.cs.introcs.Picture;
 import edu.princeton.cs.introcs.StdOut;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Iterator;
 
 import model.Film;
@@ -26,6 +44,7 @@ import model.Rating;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -47,7 +66,7 @@ public class RatingSystem
 	private String loadFilmsLocation = "src/files/films.json";
 	private String loadBackupMembersLocation = "src/backup/members.json";
 	private String loadBackupFilmsLocation = "src/backup/films.json";
-	
+
 	public static void main(String[] args) throws IOException
 	{
 		RatingSystem system = new RatingSystem();
@@ -59,7 +78,7 @@ public class RatingSystem
 		double timeStart = System.currentTimeMillis();
 		loadFilms();
 		loadMembers();
-		
+		logIn("Ben","pass");
 		saveFilms();
 		saveMembers();
 		double timeStop = System.currentTimeMillis();
@@ -97,7 +116,6 @@ public class RatingSystem
 					}
 				}
 			}
-			//StdOut.println("Number of members loaded: " + members.size());
 		} catch (FileNotFoundException e) {
 			this.loadMembersLocation = "src/backup/members.json";
 			this.loadBackupMembersLocation = "src/files/members.json";
@@ -127,7 +145,7 @@ public class RatingSystem
 			newMember.add(member.getFirstName());
 			newMember.add(member.getSecondName());
 			newMember.add(member.getPassword());
-			
+
 			Map <Integer, Integer> hm = new HashMap<Integer, Integer>();
 			for (int j = 0; j < films.size(); j++)
 			{
@@ -144,7 +162,6 @@ public class RatingSystem
 		FileWriter file = new FileWriter("src/files/members.json");
 		try {
 			file.write(obj.toJSONString());
-			//StdOut.println("Number of members saved: " + obj.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -170,6 +187,11 @@ public class RatingSystem
 				String year = (String) newArray.get(2);
 				String genre = (String) newArray.get(3);
 				String imageLocation = (String) newArray.get(4);
+				if(imageLocation.equals("src/images/no_image_available.jpg"))
+				{
+					imageLocation = getFilmImage(title);
+					StdOut.println(i);
+				}
 
 				Film film = new Film(ID, title, year, genre);
 				film.setFilmImage(imageLocation);
@@ -210,7 +232,6 @@ public class RatingSystem
 		FileWriter file = new FileWriter("src/files/films.json");
 		try {
 			file.write(obj.toJSONString());
-			//StdOut.println("Number of films saved: " + obj.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 
@@ -258,7 +279,7 @@ public class RatingSystem
 			member.getRatings().put(ID, newRating);
 		}
 	}
-	
+
 	public void newRating(int userID, Film film, int rating) throws IOException
 	{
 		Member member = members.get(userID);
@@ -297,6 +318,77 @@ public class RatingSystem
 		}
 	}
 	
+	public void saveImage(String urlString, String filmName)
+	{
+		Image image = null;
+		try {
+		    URL url = new URL(urlString);
+		    image = ImageIO.read(url);
+		    BufferedImage image2 = (BufferedImage) image;
+		    File newFile = new File("src/images/"+filmName);
+		    ImageIO.write(image2, "gif", newFile);
+		} catch (IOException e) {
+		}
+	}
+	
+	public String getFilmImage(String filmName) throws IOException
+	{
+		String search = filmName.replaceAll("\\s+","");
+		URL googleSearch = new URL("http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + search);
+
+		BufferedReader in = new BufferedReader(
+				new InputStreamReader(googleSearch.openStream()));
+
+		String line;
+		line = in.readLine();
+		in.close();
+		
+
+		Object obj=JSONValue.parse(line);
+		JSONObject object = (JSONObject)obj;
+		
+		JSONObject newObj = (JSONObject) object.get("responseData");
+		JSONArray newerObj = (JSONArray) newObj.get("results");
+		JSONObject evenNewerObj = (JSONObject) newerObj.get(0);
+		String imageString = (String) evenNewerObj.get("unescapedUrl");
+		
+		return imageString;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<Integer, Integer> sortFilmsByRatings()
+	{
+		HashMap<Integer, Integer> hmap = new HashMap<Integer, Integer>();
+		HashMap<Integer, Rating> userRatings = loggedIn.getRatings();
+		for(int i = 0; i<films.size();i++)
+		{
+			if(userRatings.get(i)!=null)
+				hmap.put(i, userRatings.get(i).getRating());
+		}
+		Map<Integer, Integer> map = sortByValues(hmap); 
+		return map;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static HashMap sortByValues(HashMap map) { 
+		List list = new LinkedList(map.entrySet());
+		// Defined Custom Comparator here
+		Collections.sort(list, new Comparator() {
+			public int compare(Object o1, Object o2) {
+				return ((Comparable) ((Map.Entry) (o2)).getValue()).compareTo(((Map.Entry) (o1)).getValue());
+			}
+		});
+
+		// Here I am copying the sorted list in HashMap
+		// using LinkedHashMap to preserve the insertion order
+		HashMap sortedHashMap = new LinkedHashMap();
+		for (Iterator it = list.iterator(); it.hasNext();) {
+			Map.Entry entry = (Map.Entry) it.next();
+			sortedHashMap.put(entry.getKey(), entry.getValue());
+		} 
+		return sortedHashMap;
+	}
+
 	public void randomiseRatings()
 	{
 		Random rand = new Random();
@@ -331,20 +423,20 @@ public class RatingSystem
 		File source = new File(loadFilmsLocation);
 		File dest = new File(loadBackupFilmsLocation);
 		try {
-		    FileUtils.copyFile(source, dest);
+			FileUtils.copyFile(source, dest);
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
-	
+
 	public void backupMembers()
 	{
 		File membersSource = new File(loadMembersLocation);
 		File membersDest = new File(loadBackupMembersLocation);
 		try {
-		    FileUtils.copyFile(membersSource, membersDest);
+			FileUtils.copyFile(membersSource, membersDest);
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	public void deleteAllRatings()
@@ -355,7 +447,7 @@ public class RatingSystem
 			member.getRatings().clear();
 		}
 	}
-	
+
 	//purely for setting up members from csv file, should only be used once
 	public void setUpMembers() throws IOException
 	{
