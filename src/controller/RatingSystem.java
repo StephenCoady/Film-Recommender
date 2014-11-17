@@ -112,7 +112,7 @@ public class RatingSystem
 					{
 						String string = jsonObject2.get(Integer.toString(j)).toString();
 						int rating = Integer.parseInt(string);
-						InitialNewRating(members.indexOf(newMember), films.get(j), rating);
+						initialNewRating(members.indexOf(newMember), films.get(j), rating);
 					}
 				}
 			}
@@ -190,7 +190,8 @@ public class RatingSystem
 				if(imageLocation.equals("src/images/no_image_available.jpg"))
 				{
 					imageLocation = getFilmImage(title);
-					StdOut.println(i);
+					imageLocation = saveImage(imageLocation, title);
+					StdOut.println(i+1);
 				}
 
 				Film film = new Film(ID, title, year, genre);
@@ -248,14 +249,17 @@ public class RatingSystem
 		saveMembers();
 	}
 
-	public void newFilm(String name, String year, String genre) throws IOException
+	public void newFilm(String title, String year, String genre) throws IOException
 	{
-		Film newFilm = new Film(films.size(), name, year, genre);
+		Film newFilm = new Film(films.size(), title, year, genre);
 		films.add(newFilm);
+		String url = getFilmImage(title);
+		saveImage(url, title);
+		newFilm.setFilmImage("src/images/" + title + ".gif");
 		saveFilms();
 	}
 
-	public void InitialNewRating(int userID, Film film, int rating) throws IOException
+	public void initialNewRating(int userID, Film film, int rating) throws IOException
 	{
 		Member member = members.get(userID);
 		int ID = film.getID();
@@ -318,23 +322,25 @@ public class RatingSystem
 		}
 	}
 	
-	public void saveImage(String urlString, String filmName)
+	public String saveImage(String urlString, String filmName)
 	{
 		Image image = null;
+		File newFile = null;
 		try {
 		    URL url = new URL(urlString);
 		    image = ImageIO.read(url);
 		    BufferedImage image2 = (BufferedImage) image;
-		    File newFile = new File("src/images/"+filmName);
+		    newFile = new File("src/images/"+ filmName+ ".gif");
 		    ImageIO.write(image2, "gif", newFile);
 		} catch (IOException e) {
 		}
+		return "src/images/" + filmName + ".gif";
 	}
 	
 	public String getFilmImage(String filmName) throws IOException
 	{
-		String search = filmName.replaceAll("\\s+","");
-		URL googleSearch = new URL("http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + search);
+		String search = filmName.replaceAll("\\s+","+");
+		URL googleSearch = new URL("http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + search + "+film");
 
 		BufferedReader in = new BufferedReader(
 				new InputStreamReader(googleSearch.openStream()));
@@ -342,7 +348,6 @@ public class RatingSystem
 		String line;
 		line = in.readLine();
 		in.close();
-		
 
 		Object obj=JSONValue.parse(line);
 		JSONObject object = (JSONObject)obj;
@@ -439,6 +444,7 @@ public class RatingSystem
 			e.printStackTrace();
 		}
 	}
+	
 	public void deleteAllRatings()
 	{
 		for(Member member: members)
