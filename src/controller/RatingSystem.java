@@ -10,9 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -119,17 +122,25 @@ public class RatingSystem
 		} catch (FileNotFoundException e) {
 			this.loadMembersLocation = "src/backup/members.json";
 			this.loadBackupMembersLocation = "src/files/members.json";
+			errorLog(e.getMessage());
 			loadMembers();
 		} catch (IOException e) {
 			this.loadMembersLocation = "src/backup/members.json";
 			this.loadBackupMembersLocation = "src/files/members.json";
+			errorLog(e.getMessage());
 			loadMembers();
 		} catch (ParseException e) {
 			this.loadMembersLocation = "src/backup/members.json";
 			this.loadBackupMembersLocation = "src/files/members.json";
+			errorLog(e.getMessage());
 			loadMembers();
 		}
-		backupMembers();
+		try {
+			backupMembers();
+		} catch (IOException e) {
+			e.printStackTrace();
+			errorLog(e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -164,13 +175,14 @@ public class RatingSystem
 			file.write(obj.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
+			errorLog(e.getMessage());
 		} finally {
 			file.flush();
 			file.close();
 		}
 	}
 
-	public void loadFilms()
+	public void loadFilms() throws IOException
 	{
 		JSONParser parser = new JSONParser();
 		try {
@@ -201,14 +213,17 @@ public class RatingSystem
 		} catch (FileNotFoundException e) {
 			this.loadFilmsLocation = "src/backup/films.json";
 			this.loadBackupFilmsLocation = "src/files/films.json";
+			errorLog(e.getMessage());
 			loadFilms();
 		} catch (IOException e) {
 			this.loadFilmsLocation = "src/backup/films.json";
 			this.loadBackupFilmsLocation = "src/files/films.json";
+			errorLog(e.getMessage());
 			loadFilms();
 		} catch (ParseException e) {
 			this.loadFilmsLocation = "src/backup/films.json";
 			this.loadBackupFilmsLocation = "src/files/films.json";
+			errorLog(e.getMessage());
 			loadFilms();
 		}
 		backUpFilms();
@@ -235,7 +250,7 @@ public class RatingSystem
 			file.write(obj.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
-
+			errorLog(e.getMessage());
 		} finally {
 			file.flush();
 			file.close();
@@ -333,6 +348,7 @@ public class RatingSystem
 		    newFile = new File("src/images/"+ filmName+ ".gif");
 		    ImageIO.write(image2, "gif", newFile);
 		} catch (IOException e) {
+			errorLog(e.getMessage());
 		}
 		return "src/images/" + filmName + ".gif";
 	}
@@ -431,10 +447,32 @@ public class RatingSystem
 			FileUtils.copyFile(source, dest);
 		} catch (IOException e) {
 			e.printStackTrace();
+			errorLog(e.getMessage());
 		}
 	}
 
-	public void backupMembers()
+	public void errorLog(String errorDetails)
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter("src/backup/errorLog.txt", true);
+		} catch (IOException e1) {
+		}
+		try {
+			writer.write("-------------------------------------------------------");
+			writer.write("\n" + "Logged on: " + dateFormat.format(date) + "\n" + "error: " +  errorDetails +"\n" + "\n");
+			writer.write("-------------------------------------------------------");
+		} catch (IOException e) {
+		}
+		try {
+			writer.close();
+		} catch (IOException e) {
+		}
+	}
+	
+	public void backupMembers() throws IOException
 	{
 		File membersSource = new File(loadMembersLocation);
 		File membersDest = new File(loadBackupMembersLocation);
@@ -442,6 +480,7 @@ public class RatingSystem
 			FileUtils.copyFile(membersSource, membersDest);
 		} catch (IOException e) {
 			e.printStackTrace();
+			errorLog(e.getMessage());
 		}
 	}
 	
@@ -474,5 +513,9 @@ public class RatingSystem
 		finally {
 			reader.close();
 		}
+	}
+
+	public Member getLoggedIn() {
+		return loggedIn;
 	}
 }

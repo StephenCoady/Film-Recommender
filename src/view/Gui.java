@@ -1,8 +1,5 @@
 package view;
 
-import model.Film;
-import model.Member;
-import model.Rating;
 import controller.RatingSystem;
 
 import java.util.Iterator;
@@ -10,6 +7,7 @@ import java.util.Map;
 
 public class Gui 
 {
+	@SuppressWarnings("rawtypes")
 	public void sortFilms()
 	{
 		RatingSystem ratingSystem = new RatingSystem();
