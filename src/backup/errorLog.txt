@@ -11,4 +11,8 @@ error: src/files/films.json (No such file or directory)
 Logged on: 2014/11/18 15:02:54
 error: src/files/films.json (No such file or directory)
 
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/19 18:30:11
+error: Can't get input stream from URL!
+
 -------------------------------------------------------

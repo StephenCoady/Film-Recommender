@@ -72,7 +72,7 @@ public class RatingSystem
 	private HashMap<Integer, Integer> similarMembers = new HashMap<Integer, Integer>();
 	private ArrayList<Film> recommendedFilms = new ArrayList<Film>();
 
-	
+
 	public static void main(String[] args) throws IOException
 	{
 		RatingSystem system = new RatingSystem();
@@ -81,23 +81,15 @@ public class RatingSystem
 
 	private void run() throws IOException
 	{
-		double timeStart = System.currentTimeMillis();
+		double timeStart = (int) System.currentTimeMillis();
 		loadFilms();
 		loadMembers();
-		logIn("Cust2","pass");
+		logIn("Ben","pass");
 		getSimilarMembers();
-//		for(int i = 0; i<members.size();i++)
-//		{
-//			StdOut.println(i +": " + similarMembers.get(i));
-//		}
 		getFilmRecommendations();
-		for (int i = 0;i<recommendedFilms.size();i++)
-		{
-			StdOut.println(recommendedFilms.get(i));
-		}
 		saveFilms();
 		saveMembers();
-		double timeStop = System.currentTimeMillis();
+		double timeStop = (int) System.currentTimeMillis();
 		StdOut.println("Total running time: " + ((timeStop - timeStart)/1000) + " seconds");
 	}
 
@@ -203,7 +195,6 @@ public class RatingSystem
 	{
 		JSONParser parser = new JSONParser();
 		try {
-
 			Object obj = parser.parse(new FileReader(loadFilmsLocation));
 			JSONObject jsonObject = (JSONObject) obj;
 			for (int i = 0; i < jsonObject.size(); i++)
@@ -289,6 +280,18 @@ public class RatingSystem
 		saveImage(url, title);
 		newFilm.setFilmImage("src/images/" + title + ".gif");
 		saveFilms();
+	}
+
+	public void deleteFilm(Film film)
+	{
+		int index = films.indexOf(film);
+		for(int i = 0; i<members.size(); i++)
+		{
+			members.get(i).getRatings().remove(index);
+		}
+		films.remove(film);
+		File file = new File("src/images/" + film.getTitle() + ".gif");
+		file.delete();
 	}
 
 	public void initialNewRating(int userID, Film film, int rating) throws IOException
@@ -453,39 +456,56 @@ public class RatingSystem
 	public void getFilmRecommendations()
 	{
 		int largestNum = 0;
-		int secondLargestNum = 0;
 		int largest = 0;
 		int secondLargest = 0;
+		int thirdLargest = 0;
+		int fourthLargest = 0;
 		for(int i = 0; i < members.size(); i++)
 		{
 			if(similarMembers.get(i)!=null)
 			{
-				if(similarMembers.get(i)>largestNum)
+				if(similarMembers.get(i) > largestNum)
 				{
 					largestNum = similarMembers.get(i);
+					fourthLargest = thirdLargest;
+					thirdLargest = secondLargest;
 					secondLargest = largest;
 					largest = i;
 				}
 			}
 		}
-		StdOut.println("Most similar member :" + members.get(largest).getAccountName());
+
+
 		Member mostSimilar = members.get(largest);
 		Member secondMostSimilar = members.get(secondLargest);
-		
+		Member thirdMostSimilar = members.get(thirdLargest);
+		Member fourthMostSimilar = members.get(fourthLargest);
+
 		for(int i = 0; i<films.size();i++)
 		{
 			if(!loggedIn.getRatings().containsKey(i) && !recommendedFilms.contains(films.get(i)))
 			{
 				if(mostSimilar.getRatings().get(i)!=null &&mostSimilar.getRatings().get(i).getRating()>=3)
-				recommendedFilms.add(mostSimilar.getRatings().get(i).getFilm());
+					recommendedFilms.add(mostSimilar.getRatings().get(i).getFilm());
 			}
 			if(!loggedIn.getRatings().containsKey(i) && !recommendedFilms.contains(films.get(i)))
 			{
 				if(secondMostSimilar.getRatings().get(i)!=null &&secondMostSimilar.getRatings().get(i).getRating()>=3)
-				recommendedFilms.add(secondMostSimilar.getRatings().get(i).getFilm());
+					recommendedFilms.add(secondMostSimilar.getRatings().get(i).getFilm());
+			}
+			if(!loggedIn.getRatings().containsKey(i) && !recommendedFilms.contains(films.get(i)))
+			{
+				if(thirdMostSimilar.getRatings().get(i)!=null &&thirdMostSimilar.getRatings().get(i).getRating()>=3)
+					recommendedFilms.add(thirdMostSimilar.getRatings().get(i).getFilm());
+			}
+			if(!loggedIn.getRatings().containsKey(i) && !recommendedFilms.contains(films.get(i)))
+			{
+				if(fourthMostSimilar.getRatings().get(i)!=null &&fourthMostSimilar.getRatings().get(i).getRating()>=3)
+					recommendedFilms.add(fourthMostSimilar.getRatings().get(i).getFilm());
 			}
 		}
 	}
+
 
 	public void randomiseRatings()
 	{
@@ -501,7 +521,7 @@ public class RatingSystem
 		for(Member member: members)
 		{
 			member.getRatings().clear();
-			for(int i = 0; i < 10; i++)
+			for(int i = 0; i < 25; i++)
 			{
 				int randomKey = rand.nextInt(films.size());
 				int random = rand.nextInt(5);
