@@ -13,6 +13,7 @@ import java.io.Reader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -71,7 +72,10 @@ public class RatingSystem
 	private String loadBackupFilmsLocation = "src/backup/films.json";
 	private HashMap<Integer, Integer> similarMembers = new HashMap<Integer, Integer>();
 	private ArrayList<Film> recommendedFilms = new ArrayList<Film>();
-
+	private static final Comparator<Film> BY_TITLE   = new ByTitle();
+	private static final Comparator<Film> BY_YEAR  = new ByYear();
+	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
+	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
 
 	public static void main(String[] args) throws IOException
 	{
@@ -79,18 +83,26 @@ public class RatingSystem
 		system.run();
 	}
 
+
 	private void run() throws IOException
 	{
-		double timeStart = (int) System.currentTimeMillis();
-		loadFilms();
-		loadMembers();
-		logIn("Ben","pass");
-		getSimilarMembers();
-		getFilmRecommendations();
-		saveFilms();
-		saveMembers();
-		double timeStop = (int) System.currentTimeMillis();
-		StdOut.println("Total running time: " + ((timeStop - timeStart)/1000) + " seconds");
+		try
+		{
+			double timeStart = (int) System.currentTimeMillis();
+			loadFilms();
+			loadMembers();
+			logIn("Ben","pass");
+			getSimilarMembers();
+			getFilmRecommendations();
+			saveFilms();
+			saveMembers();
+			double timeStop = (int) System.currentTimeMillis();
+			StdOut.println("Total running time: " + ((timeStop - timeStart)/1000) + " seconds");
+		}
+		catch(Exception e)
+		{
+			errorLog(e.getMessage());
+		}
 	}
 
 	public void loadMembers()
@@ -204,7 +216,11 @@ public class RatingSystem
 				String ID2 = obj2.toString();
 				int ID = Integer.parseInt(ID2);
 				String title = (String) newArray.get(1);
-				String year = (String) newArray.get(2);
+
+				Long longYear = (Long) newArray.get(2);
+				String stringYear = Long.toString(longYear);
+				int year = Integer.valueOf(stringYear);
+
 				String genre = (String) newArray.get(3);
 				String imageLocation = (String) newArray.get(4);
 				if(imageLocation.equals("src/images/no_image_available.jpg"))
@@ -272,7 +288,7 @@ public class RatingSystem
 		saveMembers();
 	}
 
-	public void newFilm(String title, String year, String genre) throws IOException
+	public void newFilm(String title, int year, String genre) throws IOException
 	{
 		Film newFilm = new Film(films.size(), title, year, genre);
 		films.add(newFilm);
@@ -506,6 +522,34 @@ public class RatingSystem
 		}
 	}
 
+
+	public void sortByTitle()
+	{
+		Collections.sort(films, BY_TITLE);
+		for (int i = 0; i < films.size(); i++)
+			sortedByTitle.add(films.get(i));
+	}
+
+	// comparator to sort by name
+	private static class ByTitle implements Comparator<Film> {
+		public int compare(Film a, Film b) {
+			return a.getTitle().compareTo(b.getTitle());
+		}
+	}
+
+	public void sortByYear()
+	{
+		Collections.sort(films, BY_YEAR);
+		for (int i = 0; i < films.size(); i++)
+			sortedByYear.add(films.get(i));
+	}
+
+	// comparator to sort by section
+	private static class ByYear implements Comparator<Film> {
+		public int compare(Film a, Film b) {
+			return b.getYear() - a.getYear();
+		}
+	}
 
 	public void randomiseRatings()
 	{

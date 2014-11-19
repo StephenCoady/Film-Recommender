@@ -3,22 +3,25 @@ package model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 
 import javax.imageio.ImageIO;
+
+
 
 
 public class Film 
 {
 	private int ID;
 	private String title;
-	private String year;
+	private int year;
 	private String genre;
 	private String imagePath;
 	private double sumOfRatings = 0;
 	private double numberOfRatings = 0;
 	
 
-	public Film(int ID, String title, String year, String genre)
+	public Film(int ID, String title, int year, String genre)
 	{
 		this.ID = ID;
 		this.title = title;
@@ -69,11 +72,11 @@ public class Film
 		this.title = title;
 	}
 
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 
