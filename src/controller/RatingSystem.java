@@ -59,7 +59,7 @@ import com.google.gson.JsonParseException;
 
 
 @SuppressWarnings("unused")
-public class RatingSystem 
+public class RatingSystem
 {
 	private ArrayList<Member> members = new ArrayList<Member>();
 	private ArrayList<Film> films = new ArrayList<Film>();
@@ -69,7 +69,10 @@ public class RatingSystem
 	private String loadFilmsLocation = "src/files/films.json";
 	private String loadBackupMembersLocation = "src/backup/members.json";
 	private String loadBackupFilmsLocation = "src/backup/films.json";
+	private HashMap<Integer, Integer> similarMembers = new HashMap<Integer, Integer>();
+	private ArrayList<Film> recommendedFilms = new ArrayList<Film>();
 
+	
 	public static void main(String[] args) throws IOException
 	{
 		RatingSystem system = new RatingSystem();
@@ -81,7 +84,17 @@ public class RatingSystem
 		double timeStart = System.currentTimeMillis();
 		loadFilms();
 		loadMembers();
-		logIn("Ben","pass");
+		logIn("Cust2","pass");
+		getSimilarMembers();
+//		for(int i = 0; i<members.size();i++)
+//		{
+//			StdOut.println(i +": " + similarMembers.get(i));
+//		}
+		getFilmRecommendations();
+		for (int i = 0;i<recommendedFilms.size();i++)
+		{
+			StdOut.println(recommendedFilms.get(i));
+		}
 		saveFilms();
 		saveMembers();
 		double timeStop = System.currentTimeMillis();
@@ -102,12 +115,14 @@ public class RatingSystem
 				String obj3  = (String) newArray.get(1); // firstname
 				String obj4  = (String) newArray.get(2); // secondname
 				String obj5  = (String) newArray.get(3); // password
+				String obj6  = (String) newArray.get(4); // genre preference
+				String obj7  = (String) newArray.get(5); // year preference
 
 				Member newMember = new Member(obj3, obj4, obj2, obj5);
 				members.add(newMember);
 
 				//deals with the member's ratings
-				Object keyArray = newArray.get(4);
+				Object keyArray = newArray.get(6);
 				JSONObject jsonObject2 = (JSONObject) keyArray;
 				for(int j = 0; j<films.size();j++)
 				{
@@ -156,6 +171,8 @@ public class RatingSystem
 			newMember.add(member.getFirstName());
 			newMember.add(member.getSecondName());
 			newMember.add(member.getPassword());
+			newMember.add(member.getGenrePreference());
+			newMember.add(member.getYearPreference());
 
 			Map <Integer, Integer> hm = new HashMap<Integer, Integer>();
 			for (int j = 0; j < films.size(); j++)
@@ -336,23 +353,23 @@ public class RatingSystem
 			}
 		}
 	}
-	
+
 	public String saveImage(String urlString, String filmName)
 	{
 		Image image = null;
 		File newFile = null;
 		try {
-		    URL url = new URL(urlString);
-		    image = ImageIO.read(url);
-		    BufferedImage image2 = (BufferedImage) image;
-		    newFile = new File("src/images/"+ filmName+ ".gif");
-		    ImageIO.write(image2, "gif", newFile);
+			URL url = new URL(urlString);
+			image = ImageIO.read(url);
+			BufferedImage image2 = (BufferedImage) image;
+			newFile = new File("src/images/"+ filmName+ ".gif");
+			ImageIO.write(image2, "gif", newFile);
 		} catch (IOException e) {
 			errorLog(e.getMessage());
 		}
 		return "src/images/" + filmName + ".gif";
 	}
-	
+
 	public String getFilmImage(String filmName) throws IOException
 	{
 		String search = filmName.replaceAll("\\s+","+");
@@ -367,12 +384,12 @@ public class RatingSystem
 
 		Object obj=JSONValue.parse(line);
 		JSONObject object = (JSONObject)obj;
-		
+
 		JSONObject newObj = (JSONObject) object.get("responseData");
 		JSONArray newerObj = (JSONArray) newObj.get("results");
 		JSONObject evenNewerObj = (JSONObject) newerObj.get(0);
 		String imageString = (String) evenNewerObj.get("unescapedUrl");
-		
+
 		return imageString;
 	}
 
@@ -391,11 +408,12 @@ public class RatingSystem
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static HashMap sortByValues(HashMap map) { 
+	private static HashMap sortByValues(HashMap map){ 
 		List list = new LinkedList(map.entrySet());
 		// Defined Custom Comparator here
 		Collections.sort(list, new Comparator() {
-			public int compare(Object o1, Object o2) {
+			public int compare(Object o1, Object o2) 
+			{
 				return ((Comparable) ((Map.Entry) (o2)).getValue()).compareTo(((Map.Entry) (o1)).getValue());
 			}
 		});
@@ -408,6 +426,65 @@ public class RatingSystem
 			sortedHashMap.put(entry.getKey(), entry.getValue());
 		} 
 		return sortedHashMap;
+	}
+
+	public void getSimilarMembers()
+	{
+		for(int i = 0; i < members.size();i++)
+		{
+			int dotProduct = 0;
+			if(loggedIn!=members.get(i))
+			{
+				for(int j = 0;j<films.size();j++)
+				{
+					if(loggedIn.getRatings().get(j) != null && members.get(i).getRatings().get(j) != null)
+					{
+						Integer memberRating = loggedIn.getRatings().get(j).getRating();
+						Integer checkRating = members.get(i).getRatings().get(j).getRating();
+						dotProduct += (memberRating*checkRating);
+					}
+				}
+				if(dotProduct > 0)
+					similarMembers.put(i, dotProduct);
+			}
+		}
+	}
+
+	public void getFilmRecommendations()
+	{
+		int largestNum = 0;
+		int secondLargestNum = 0;
+		int largest = 0;
+		int secondLargest = 0;
+		for(int i = 0; i < members.size(); i++)
+		{
+			if(similarMembers.get(i)!=null)
+			{
+				if(similarMembers.get(i)>largestNum)
+				{
+					largestNum = similarMembers.get(i);
+					secondLargest = largest;
+					largest = i;
+				}
+			}
+		}
+		StdOut.println("Most similar member :" + members.get(largest).getAccountName());
+		Member mostSimilar = members.get(largest);
+		Member secondMostSimilar = members.get(secondLargest);
+		
+		for(int i = 0; i<films.size();i++)
+		{
+			if(!loggedIn.getRatings().containsKey(i) && !recommendedFilms.contains(films.get(i)))
+			{
+				if(mostSimilar.getRatings().get(i)!=null &&mostSimilar.getRatings().get(i).getRating()>=3)
+				recommendedFilms.add(mostSimilar.getRatings().get(i).getFilm());
+			}
+			if(!loggedIn.getRatings().containsKey(i) && !recommendedFilms.contains(films.get(i)))
+			{
+				if(secondMostSimilar.getRatings().get(i)!=null &&secondMostSimilar.getRatings().get(i).getRating()>=3)
+				recommendedFilms.add(secondMostSimilar.getRatings().get(i).getFilm());
+			}
+		}
 	}
 
 	public void randomiseRatings()
@@ -424,7 +501,7 @@ public class RatingSystem
 		for(Member member: members)
 		{
 			member.getRatings().clear();
-			for(int i = 0; i < 20; i++)
+			for(int i = 0; i < 10; i++)
 			{
 				int randomKey = rand.nextInt(films.size());
 				int random = rand.nextInt(5);
@@ -471,7 +548,7 @@ public class RatingSystem
 		} catch (IOException e) {
 		}
 	}
-	
+
 	public void backupMembers() throws IOException
 	{
 		File membersSource = new File(loadMembersLocation);
@@ -483,7 +560,7 @@ public class RatingSystem
 			errorLog(e.getMessage());
 		}
 	}
-	
+
 	public void deleteAllRatings()
 	{
 		for(Member member: members)

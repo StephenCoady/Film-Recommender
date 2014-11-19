@@ -11,6 +11,8 @@ public class Member
 	private String password;
 	private boolean loggedIn;
 	private HashMap<Integer, Rating> ratings;
+	private String genrePreference;
+	private String yearPreference;
 	
 	public Member(String firstName, String secondName, String accountName, String password)
 	{
@@ -96,5 +98,21 @@ public class Member
 	public void setLoggedIn(boolean loggedIn) 
 	{
 		this.loggedIn = loggedIn;
+	}
+
+	public String getGenrePreference() {
+		return genrePreference;
+	}
+
+	public void setGenrePreference(String genrePreference) {
+		this.genrePreference = genrePreference;
+	}
+
+	public String getYearPreference() {
+		return yearPreference;
+	}
+
+	public void setYearPreference(String yearPreference) {
+		this.yearPreference = yearPreference;
 	}
 }
