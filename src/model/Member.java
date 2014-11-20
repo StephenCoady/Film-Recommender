@@ -12,7 +12,7 @@ public class Member
 	private boolean loggedIn;
 	private HashMap<Integer, Rating> ratings;
 	private String genrePreference;
-	private String yearPreference;
+	private int yearPreference;
 	
 	public Member(String firstName, String secondName, String accountName, String password)
 	{
@@ -108,11 +108,11 @@ public class Member
 		this.genrePreference = genrePreference;
 	}
 
-	public String getYearPreference() {
+	public int getYearPreference() {
 		return yearPreference;
 	}
 
-	public void setYearPreference(String yearPreference) {
+	public void setYearPreference(int yearPreference) {
 		this.yearPreference = yearPreference;
 	}
 }

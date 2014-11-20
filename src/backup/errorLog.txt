@@ -15,4 +15,16 @@ error: src/files/films.json (No such file or directory)
 Logged on: 2014/11/19 18:30:11
 error: Can't get input stream from URL!
 
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/19 23:48:16
+error: java.lang.Long cannot be cast to java.lang.Integer
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/19 23:48:26
+error: java.lang.Long cannot be cast to java.lang.Integer
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/19 23:48:50
+error: java.lang.Long cannot be cast to java.lang.Integer
+
 -------------------------------------------------------

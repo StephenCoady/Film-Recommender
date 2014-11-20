@@ -72,6 +72,7 @@ public class RatingSystem
 	private String loadBackupFilmsLocation = "src/backup/films.json";
 	private HashMap<Integer, Integer> similarMembers = new HashMap<Integer, Integer>();
 	private ArrayList<Film> recommendedFilms = new ArrayList<Film>();
+	private ArrayList<Film> betterRecommendedFilms = new ArrayList<Film>();
 	private static final Comparator<Film> BY_TITLE   = new ByTitle();
 	private static final Comparator<Film> BY_YEAR  = new ByYear();
 	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
@@ -88,19 +89,21 @@ public class RatingSystem
 	{
 		try
 		{
-			double timeStart = (int) System.currentTimeMillis();
+			double timeStart = System.currentTimeMillis();
 			loadFilms();
 			loadMembers();
 			logIn("Ben","pass");
 			getSimilarMembers();
 			getFilmRecommendations();
+			getBetterRecommendations();
 			saveFilms();
 			saveMembers();
-			double timeStop = (int) System.currentTimeMillis();
+			double timeStop = System.currentTimeMillis();
 			StdOut.println("Total running time: " + ((timeStop - timeStart)/1000) + " seconds");
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			errorLog(e.getMessage());
 		}
 	}
@@ -120,9 +123,21 @@ public class RatingSystem
 				String obj4  = (String) newArray.get(2); // secondname
 				String obj5  = (String) newArray.get(3); // password
 				String obj6  = (String) newArray.get(4); // genre preference
-				String obj7  = (String) newArray.get(5); // year preference
-
+				
+				Long obj7  = (Long) newArray.get(5);     // year preference
+				String stringPref = Long.toString(obj7);
+				int pref;
+				if(stringPref==null)
+				{
+					pref = 0;
+				}
+				else
+				{
+					pref = Integer.valueOf(stringPref);
+				}
 				Member newMember = new Member(obj3, obj4, obj2, obj5);
+				newMember.setGenrePreference(obj6);
+				newMember.setYearPreference(pref);
 				members.add(newMember);
 
 				//deals with the member's ratings
@@ -412,41 +427,6 @@ public class RatingSystem
 		return imageString;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Map<Integer, Integer> sortFilmsByRatings()
-	{
-		HashMap<Integer, Integer> hmap = new HashMap<Integer, Integer>();
-		HashMap<Integer, Rating> userRatings = loggedIn.getRatings();
-		for(int i = 0; i<films.size();i++)
-		{
-			if(userRatings.get(i)!=null)
-				hmap.put(i, userRatings.get(i).getRating());
-		}
-		Map<Integer, Integer> map = sortByValues(hmap); 
-		return map;
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static HashMap sortByValues(HashMap map){ 
-		List list = new LinkedList(map.entrySet());
-		// Defined Custom Comparator here
-		Collections.sort(list, new Comparator() {
-			public int compare(Object o1, Object o2) 
-			{
-				return ((Comparable) ((Map.Entry) (o2)).getValue()).compareTo(((Map.Entry) (o1)).getValue());
-			}
-		});
-
-		// Here I am copying the sorted list in HashMap
-		// using LinkedHashMap to preserve the insertion order
-		HashMap sortedHashMap = new LinkedHashMap();
-		for (Iterator it = list.iterator(); it.hasNext();) {
-			Map.Entry entry = (Map.Entry) it.next();
-			sortedHashMap.put(entry.getKey(), entry.getValue());
-		} 
-		return sortedHashMap;
-	}
-
 	public void getSimilarMembers()
 	{
 		for(int i = 0; i < members.size();i++)
@@ -522,6 +502,26 @@ public class RatingSystem
 		}
 	}
 
+	public void getBetterRecommendations()
+	{
+		String userGenrePreference = loggedIn.getGenrePreference();
+		int userYearPreference = loggedIn.getYearPreference();
+		int decade = userYearPreference+9; 
+
+		if(userGenrePreference !=null && userYearPreference!=0)
+		{
+			for(int i = 0; i<recommendedFilms.size();i++)
+			{
+				if(recommendedFilms.get(i).getGenre().equalsIgnoreCase(userGenrePreference)
+						|| (recommendedFilms.get(i).getYear()>(userYearPreference)
+								&&recommendedFilms.get(i).getYear()<(decade)))
+				{
+					betterRecommendedFilms.add(recommendedFilms.get(i));
+				}
+			}
+		}
+
+	}
 
 	public void sortByTitle()
 	{
