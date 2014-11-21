@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -9,37 +8,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
-import edu.princeton.cs.introcs.Picture;
 import edu.princeton.cs.introcs.StdOut;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
 
 import model.Film;
 import model.Member;
@@ -54,12 +38,7 @@ import org.json.simple.parser.ParseException;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonParseException;
 
-
-@SuppressWarnings("unused")
 public class RatingSystem
 {
 	private ArrayList<Member> members = new ArrayList<Member>();
@@ -70,6 +49,8 @@ public class RatingSystem
 	private String loadFilmsLocation = "src/files/films.json";
 	private String loadBackupMembersLocation = "src/backup/members.json";
 	private String loadBackupFilmsLocation = "src/backup/films.json";
+	private String saveMembersLocation = "src/files/members.json";
+	private String saveFilmsLocation = "src/files/films.json";
 	private HashMap<Integer, Integer> similarMembers = new HashMap<Integer, Integer>();
 	private ArrayList<Film> recommendedFilms = new ArrayList<Film>();
 	private ArrayList<Film> betterRecommendedFilms = new ArrayList<Film>();
@@ -96,6 +77,10 @@ public class RatingSystem
 			getSimilarMembers();
 			getFilmRecommendations();
 			getBetterRecommendations();
+			for(int i = 0; i<members.size(); i++)
+			{
+				StdOut.println(i +": "+ members.get(i).getAccountName());
+			}
 			saveFilms();
 			saveMembers();
 			double timeStop = System.currentTimeMillis();
@@ -123,7 +108,7 @@ public class RatingSystem
 				String obj4  = (String) newArray.get(2); // secondname
 				String obj5  = (String) newArray.get(3); // password
 				String obj6  = (String) newArray.get(4); // genre preference
-				
+
 				Long obj7  = (Long) newArray.get(5);     // year preference
 				String stringPref = Long.toString(obj7);
 				int pref;
@@ -206,7 +191,7 @@ public class RatingSystem
 			obj.put(i, newMember);
 		}
 
-		FileWriter file = new FileWriter("src/files/members.json");
+		FileWriter file = new FileWriter(saveMembersLocation);
 		try {
 			file.write(obj.toJSONString());
 		} catch (IOException e) {
@@ -218,7 +203,7 @@ public class RatingSystem
 		}
 	}
 
-	public void loadFilms() throws IOException
+	public void loadFilms()
 	{
 		JSONParser parser = new JSONParser();
 		try {
@@ -284,7 +269,7 @@ public class RatingSystem
 
 			obj.put(films.get(i).getID(), newFilm);
 		}
-		FileWriter file = new FileWriter("src/files/films.json");
+		FileWriter file = new FileWriter(saveFilmsLocation);
 		try {
 			file.write(obj.toJSONString());
 		} catch (IOException e) {
@@ -350,9 +335,9 @@ public class RatingSystem
 		}
 	}
 
-	public void newRating(int userID, Film film, int rating) throws IOException
+	public void newRating(Member member, Film film, int rating) throws IOException
 	{
-		Member member = members.get(userID);
+		//Member member = members.get(userID);
 		int ID = film.getID();
 		if(!member.getRatings().containsKey(ID))
 		{
@@ -448,6 +433,10 @@ public class RatingSystem
 			}
 		}
 	}
+	public HashMap<Integer, Integer> getListOfSimilarMembers()
+	{
+		return similarMembers;
+	}
 
 	public void getFilmRecommendations()
 	{
@@ -530,7 +519,7 @@ public class RatingSystem
 			sortedByTitle.add(films.get(i));
 	}
 
-	// comparator to sort by name
+	// comparator to sort by title
 	private static class ByTitle implements Comparator<Film> {
 		public int compare(Film a, Film b) {
 			return a.getTitle().compareTo(b.getTitle());
@@ -544,14 +533,15 @@ public class RatingSystem
 			sortedByYear.add(films.get(i));
 	}
 
-	// comparator to sort by section
+	// comparator to sort by year
 	private static class ByYear implements Comparator<Film> {
 		public int compare(Film a, Film b) {
 			return b.getYear() - a.getYear();
 		}
 	}
 
-	public void randomiseRatings()
+	@SuppressWarnings("unused")
+	private void randomiseRatings()
 	{
 		Random rand = new Random();
 		ratings.clear();
@@ -565,7 +555,7 @@ public class RatingSystem
 		for(Member member: members)
 		{
 			member.getRatings().clear();
-			for(int i = 0; i < 25; i++)
+			for(int i = 0; i < 45; i++)
 			{
 				int randomKey = rand.nextInt(films.size());
 				int random = rand.nextInt(5);
@@ -580,19 +570,38 @@ public class RatingSystem
 
 	}
 
-	public void backUpFilms()
+	private void backUpFilms()
 	{
 		File source = new File(loadFilmsLocation);
 		File dest = new File(loadBackupFilmsLocation);
 		try {
 			FileUtils.copyFile(source, dest);
 		} catch (IOException e) {
-			e.printStackTrace();
 			errorLog(e.getMessage());
 		}
 	}
 
-	public void errorLog(String errorDetails)
+	public String getLoadBackupMembersLocation() {
+		return loadBackupMembersLocation;
+	}
+
+
+	public void setLoadBackupMembersLocation(String loadBackupMembersLocation) {
+		this.loadBackupMembersLocation = loadBackupMembersLocation;
+	}
+
+
+	public String getLoadBackupFilmsLocation() {
+		return loadBackupFilmsLocation;
+	}
+
+
+	public void setLoadBackupFilmsLocation(String loadBackupFilmsLocation) {
+		this.loadBackupFilmsLocation = loadBackupFilmsLocation;
+	}
+
+
+	private void errorLog(String errorDetails)
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -613,14 +622,13 @@ public class RatingSystem
 		}
 	}
 
-	public void backupMembers() throws IOException
+	private void backupMembers() throws IOException
 	{
 		File membersSource = new File(loadMembersLocation);
 		File membersDest = new File(loadBackupMembersLocation);
 		try {
 			FileUtils.copyFile(membersSource, membersDest);
 		} catch (IOException e) {
-			e.printStackTrace();
 			errorLog(e.getMessage());
 		}
 	}
@@ -635,7 +643,8 @@ public class RatingSystem
 	}
 
 	//purely for setting up members from csv file, should only be used once
-	public void setUpMembers() throws IOException
+	@SuppressWarnings("unused")
+	private void setUpMembers() throws IOException
 	{
 		CSVReader reader = new CSVReader(new FileReader("src/files/membersSetup.csv"));
 		try {
@@ -658,5 +667,102 @@ public class RatingSystem
 
 	public Member getLoggedIn() {
 		return loggedIn;
+	}
+
+
+	public ArrayList<Member> getMembers() {
+		return members;
+	}
+
+
+	public void setMembers(ArrayList<Member> members) {
+		this.members = members;
+	}
+
+
+	public ArrayList<Film> getFilms() {
+		return films;
+	}
+
+
+	public void setFilms(ArrayList<Film> films) {
+		this.films = films;
+	}
+
+
+	public ArrayList<Film> getRecommendedFilms() {
+		return recommendedFilms;
+	}
+
+
+	public void setRecommendedFilms(ArrayList<Film> recommendedFilms) {
+		this.recommendedFilms = recommendedFilms;
+	}
+
+
+	public ArrayList<Film> getBetterRecommendedFilms() {
+		return betterRecommendedFilms;
+	}
+
+
+	public void setBetterRecommendedFilms(ArrayList<Film> betterRecommendedFilms) {
+		this.betterRecommendedFilms = betterRecommendedFilms;
+	}
+
+
+	public void setLoggedIn(Member loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+
+	public void setSimilarMembers(HashMap<Integer, Integer> similarMembers) {
+		this.similarMembers = similarMembers;
+	}
+
+	public String getLoadMembersLocation() {
+		return loadMembersLocation;
+	}
+
+
+	public void setLoadMembersLocation(String loadMembersLocation) {
+		this.loadMembersLocation = loadMembersLocation;
+	}
+
+
+	public String getLoadFilmsLocation() {
+		return loadFilmsLocation;
+	}
+
+
+	public void setLoadFilmsLocation(String loadFilmsLocation) {
+		this.loadFilmsLocation = loadFilmsLocation;
+	}
+
+
+	public HashMap<Integer, Double> getRatings() {
+		return ratings;
+	}
+
+
+	public void setRatings(HashMap<Integer, Double> ratings) {
+		this.ratings = ratings;
+	}
+	public String getSaveMembersLocation() {
+		return saveMembersLocation;
+	}
+
+
+	public void setSaveMembersLocation(String saveMembersLocation) {
+		this.saveMembersLocation = saveMembersLocation;
+	}
+
+
+	public String getSaveFilmsLocation() {
+		return saveFilmsLocation;
+	}
+
+
+	public void setSaveFilmsLocation(String saveFilmsLocation) {
+		this.saveFilmsLocation = saveFilmsLocation;
 	}
 }

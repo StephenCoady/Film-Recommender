@@ -27,4 +27,860 @@ error: java.lang.Long cannot be cast to java.lang.Integer
 Logged on: 2014/11/19 23:48:50
 error: java.lang.Long cannot be cast to java.lang.Integer
 
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/20 15:01:46
+error: null
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/20 15:02:52
+error: null
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:11
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:12
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:53:54
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:14
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:41
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 14:54:42
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:00:03
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:22
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:25
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:25
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:01:26
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerMembers.json' and destination 'src/files/testerMembers.json' are the same
+
+--------------------------------------------------------------------------------------------------------------
+Logged on: 2014/11/21 15:02:43
+error: Source 'src/files/testerFilms.json' and destination 'src/files/testerFilms.json' are the same
+
 -------------------------------------------------------
