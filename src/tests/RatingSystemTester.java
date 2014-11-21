@@ -24,8 +24,8 @@ public class RatingSystemTester
 		r.setLoadMembersLocation("src/files/Members.json");
 		r.setSaveFilmsLocation("src/files/testerFilms.json");
 		r.setSaveMembersLocation("src/files/testerMembers.json");
-		r.setLoadBackupFilmsLocation("src/files/testerFilms.json");
-		r.setLoadBackupMembersLocation("src/files/testerMembers.json");
+		r.setLoadBackupFilmsLocation("src/backup/testerFilmsBackup.json");
+		r.setLoadBackupMembersLocation("src/backup/testerMembersBackup.json");
 	}
 
 	public void loadUp() throws Exception 

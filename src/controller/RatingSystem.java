@@ -77,10 +77,6 @@ public class RatingSystem
 			getSimilarMembers();
 			getFilmRecommendations();
 			getBetterRecommendations();
-			for(int i = 0; i<members.size(); i++)
-			{
-				StdOut.println(i +": "+ members.get(i).getAccountName());
-			}
 			saveFilms();
 			saveMembers();
 			double timeStop = System.currentTimeMillis();
@@ -223,6 +219,7 @@ public class RatingSystem
 
 				String genre = (String) newArray.get(3);
 				String imageLocation = (String) newArray.get(4);
+				
 				if(imageLocation.equals("src/images/no_image_available.jpg"))
 				{
 					imageLocation = getFilmImage(title);
@@ -392,8 +389,7 @@ public class RatingSystem
 	public String getFilmImage(String filmName) throws IOException
 	{
 		String search = filmName.replaceAll("\\s+","+");
-		URL googleSearch = new URL("http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + search + "+film");
-
+		URL googleSearch = new URL("http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + search + "+film+small+image");
 		BufferedReader in = new BufferedReader(
 				new InputStreamReader(googleSearch.openStream()));
 
@@ -674,19 +670,8 @@ public class RatingSystem
 		return members;
 	}
 
-
-	public void setMembers(ArrayList<Member> members) {
-		this.members = members;
-	}
-
-
 	public ArrayList<Film> getFilms() {
 		return films;
-	}
-
-
-	public void setFilms(ArrayList<Film> films) {
-		this.films = films;
 	}
 
 
@@ -695,18 +680,8 @@ public class RatingSystem
 	}
 
 
-	public void setRecommendedFilms(ArrayList<Film> recommendedFilms) {
-		this.recommendedFilms = recommendedFilms;
-	}
-
-
 	public ArrayList<Film> getBetterRecommendedFilms() {
 		return betterRecommendedFilms;
-	}
-
-
-	public void setBetterRecommendedFilms(ArrayList<Film> betterRecommendedFilms) {
-		this.betterRecommendedFilms = betterRecommendedFilms;
 	}
 
 
@@ -714,11 +689,7 @@ public class RatingSystem
 		this.loggedIn = loggedIn;
 	}
 
-
-	public void setSimilarMembers(HashMap<Integer, Integer> similarMembers) {
-		this.similarMembers = similarMembers;
-	}
-
+	
 	public String getLoadMembersLocation() {
 		return loadMembersLocation;
 	}
