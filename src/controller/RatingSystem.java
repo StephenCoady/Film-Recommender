@@ -36,8 +36,6 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import au.com.bytecode.opencsv.CSVReader;
-
 
 public class RatingSystem
 {
@@ -59,35 +57,7 @@ public class RatingSystem
 	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
 	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
 
-	public static void main(String[] args) throws IOException
-	{
-		RatingSystem system = new RatingSystem();
-		system.run();
-	}
-
-
-	private void run() throws IOException
-	{
-		try
-		{
-			double timeStart = System.currentTimeMillis();
-			loadFilms();
-			loadMembers();
-			logIn("Ben","pass");
-			getSimilarMembers();
-			getFilmRecommendations();
-			getBetterRecommendations();
-			saveFilms();
-			saveMembers();
-			double timeStop = System.currentTimeMillis();
-			StdOut.println("Total running time: " + ((timeStop - timeStart)/1000) + " seconds");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			errorLog(e.getMessage());
-		}
-	}
+	
 
 	public void loadMembers()
 	{
@@ -116,9 +86,7 @@ public class RatingSystem
 				{
 					pref = Integer.valueOf(stringPref);
 				}
-				Member newMember = new Member(obj3, obj4, obj2, obj5);
-				newMember.setGenrePreference(obj6);
-				newMember.setYearPreference(pref);
+				Member newMember = new Member(obj3, obj4, obj2, obj5, obj6, pref);
 				members.add(newMember);
 
 				//deals with the member's ratings
@@ -278,9 +246,9 @@ public class RatingSystem
 		}
 	}
 
-	public void newMember(String firstName, String secondName, String accountName, String password) throws IOException
+	public void newMember(String firstName, String secondName, String accountName, String password, String genrePref, int yearPref) throws IOException
 	{
-		Member newMember = new Member(firstName, secondName, accountName, password);
+		Member newMember = new Member(firstName, secondName, accountName, password, genrePref, yearPref);
 		members.add(newMember);
 		saveMembers();
 	}
@@ -638,29 +606,6 @@ public class RatingSystem
 		}
 	}
 
-	//purely for setting up members from csv file, should only be used once
-	@SuppressWarnings("unused")
-	private void setUpMembers() throws IOException
-	{
-		CSVReader reader = new CSVReader(new FileReader("src/files/membersSetup.csv"));
-		try {
-			String [] nextLine;
-			while ((nextLine = reader.readNext()) != null) 
-			{
-				// nextLine[] is an array of values from the line
-				String username = nextLine[0];
-				String firstName = nextLine[1];
-				String secondName = nextLine[2];
-				String password = nextLine[3];
-				Member member = new Member(firstName, secondName, username, password);
-				members.add(member);
-			}
-		}
-		finally {
-			reader.close();
-		}
-	}
-
 	public Member getLoggedIn() {
 		return loggedIn;
 	}
@@ -714,10 +659,6 @@ public class RatingSystem
 		return ratings;
 	}
 
-
-	public void setRatings(HashMap<Integer, Double> ratings) {
-		this.ratings = ratings;
-	}
 	public String getSaveMembersLocation() {
 		return saveMembersLocation;
 	}

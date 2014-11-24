@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane prefHeight="473.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SystemController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="174.0">
+               <children>
+                  <Label layoutX="12.0" layoutY="56.0" style="-fx-font-weight: bold; -fx-font-size: 16;" text="Please sign in:" AnchorPane.leftAnchor="12.0" />
+                  <TextField fx:id="userName" layoutX="12.0" layoutY="104.0" promptText="Enter Username" AnchorPane.leftAnchor="12.0" />
+                  <PasswordField fx:id="passwordEntry" layoutX="12.0" layoutY="159.0" promptText="Password" AnchorPane.leftAnchor="12.0" />
+                  <Button layoutX="14.0" layoutY="210.0" mnemonicParsing="false" onMouseClicked="#signIn" text="Sign In" AnchorPane.leftAnchor="14.0" />
+                  <Label fx:id="incorrectUser" layoutX="14.0" layoutY="257.0" maxWidth="1.7976931348623157E308" opacity="0.81" prefHeight="59.0" prefWidth="150.0" textFill="#ee0606" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" prefWidth="416.0">
+               <children>
+                  <Label layoutX="24.0" layoutY="55.0" style="-fx-font-weight: bold; -fx-font-size: 16;" text="...or Sign Up:" AnchorPane.leftAnchor="24.0" />
+                  <TextField fx:id="firstName" layoutX="24.0" layoutY="104.0" promptText="First Name" AnchorPane.leftAnchor="24.0" />
+                  <TextField fx:id="secondName" layoutX="24.0" layoutY="155.0" promptText="Second Name" AnchorPane.leftAnchor="24.0" />
+                  <TextField fx:id="desiredUserName" layoutX="24.0" layoutY="211.0" promptText="User Name" AnchorPane.leftAnchor="24.0" />
+                  <ChoiceBox fx:id="genrePreference" layoutX="223.0" layoutY="136.0" onMouseClicked="#expandGenres" prefWidth="150.0" AnchorPane.leftAnchor="223.0" />
+                  <Label layoutX="223.0" layoutY="104.0" text="Genre Preference:" AnchorPane.leftAnchor="223.0" />
+                  <Label layoutX="223.0" layoutY="203.0" text="Year Preference:" AnchorPane.leftAnchor="223.0" />
+                  <Button layoutX="223.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#signUp" text="Sign Up" AnchorPane.leftAnchor="223.0" />
+                  <TextField fx:id="yearPreference" layoutX="223.0" layoutY="237.0" promptText="Favourite Movie Era?" AnchorPane.leftAnchor="223.0" />
+                  <PasswordField fx:id="desiredPassword" layoutX="24.0" layoutY="263.0" promptText="Password" />
+                  <PasswordField fx:id="reEnteredPassword" layoutX="24.0" layoutY="317.0" promptText="Re-enter Password" />
+                  <Label fx:id="noSignUp" layoutX="24.0" layoutY="375.0" prefHeight="48.0" prefWidth="346.0" textFill="#ee0606" wrapText="true" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="737.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SystemController">
+   <children>
+      <TabPane prefHeight="737.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab text="Edit Details">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="27.0" layoutY="14.0" prefHeight="87.0" prefWidth="498.0" text="Edit Your Details Here:">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="27.0" layoutY="151.0" text="Change your first name:" />
+                        <TextField fx:id="firstNameChange" layoutX="27.0" layoutY="195.0" promptText="name change" />
+                        <Label layoutX="27.0" layoutY="267.0" text="Change your second name:" />
+                        <TextField fx:id="secondNameChange" layoutX="27.0" layoutY="311.0" promptText="name change" />
+                        <Label layoutX="27.0" layoutY="377.0" text="Change your user name:" />
+                        <TextField fx:id="usernameChange" layoutX="27.0" layoutY="430.0" promptText="new username" />
+                        <Label layoutX="348.0" layoutY="151.0" text="Change Password:" />
+                        <Label layoutX="348.0" layoutY="267.0" text="Confirm password:" />
+                        <Label layoutX="652.0" layoutY="151.0" text="Genre Preference:" />
+                        <ChoiceBox fx:id="genreChange" layoutX="652.0" layoutY="195.0" prefWidth="150.0" />
+                        <Label layoutX="652.0" layoutY="267.0" text="Year Preference:" />
+                        <TextField fx:id="yearChange" layoutX="652.0" layoutY="311.0" promptText="choose year" />
+                        <Button layoutX="652.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#changeDetails" prefHeight="48.0" prefWidth="130.0" text="Save" />
+                        <Label fx:id="incorrectDetails" layoutX="652.0" layoutY="456.0" prefHeight="54.0" prefWidth="128.0" textFill="#ee0606" wrapText="true" />
+                        <PasswordField fx:id="passwordChange" layoutX="348.0" layoutY="195.0" />
+                        <PasswordField fx:id="confirmPasswordChange" layoutX="348.0" layoutY="311.0" />
+                        <Button layoutX="480.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#resetFields" prefHeight="48.0" prefWidth="114.0" text="Reset Fields" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Rate Films">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="706.0" prefWidth="1019.0">
+                     <children>
+                        <Label layoutX="22.0" layoutY="26.0" prefHeight="41.0" prefWidth="514.0" text="Rate Films">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="823.0" layoutY="645.0" mnemonicParsing="false" text="Back" />
+                        <Button layoutX="907.0" layoutY="645.0" mnemonicParsing="false" text="Forward" />
+                        <Pane fx:id="filmPanel1" layoutX="32.0" layoutY="67.0" prefHeight="177.0" prefWidth="429.0">
+                           <children>
+                              <Label fx:id="film1" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="rate1" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="filmPanel2" layoutX="32.0" layoutY="256.0" prefHeight="177.0" prefWidth="429.0">
+                           <children>
+                              <Label fx:id="film2" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <ImageView fx:id="image2" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="rate2" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="filmPanel111" layoutX="32.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
+                           <children>
+                              <Label fx:id="film3" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <ImageView fx:id="image3" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="rate3" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="filmPanel112" layoutX="547.0" layoutY="67.0" prefHeight="177.0" prefWidth="429.0">
+                           <children>
+                              <Label fx:id="film4" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <ImageView fx:id="image4" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="rate4" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="filmPanel1121" layoutX="547.0" layoutY="256.0" prefHeight="177.0" prefWidth="429.0">
+                           <children>
+                              <Label fx:id="film5" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <ImageView fx:id="image5" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="rate5" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="filmPanel1122" layoutX="547.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
+                           <children>
+                              <Label fx:id="film6" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <ImageView fx:id="image6" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="rate6" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Film Management">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

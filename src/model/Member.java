@@ -13,8 +13,9 @@ public class Member
 	private HashMap<Integer, Rating> ratings;
 	private String genrePreference;
 	private int yearPreference;
-	
-	public Member(String firstName, String secondName, String accountName, String password)
+
+	public Member(String firstName, String secondName, String accountName, 
+			String password, String genrePreference, int yearPreference)
 	{
 		this.firstName = firstName;
 		this.secondName = secondName;
@@ -67,15 +68,15 @@ public class Member
 	{
 		this.accountName = accountName;
 	}
-	
+
 	public boolean passwordCheck(String password)
 	{
 		String lowerCasePass = password.toLowerCase();
 		String lowerCaseCheck = this.password.toLowerCase();
-		
+
 		if(lowerCasePass.equals(lowerCaseCheck))
 		{
-				return true;
+			return true;
 		}
 		else
 		{

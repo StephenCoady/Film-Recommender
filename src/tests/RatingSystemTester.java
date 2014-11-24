@@ -96,12 +96,12 @@ public class RatingSystemTester
 	public void testAddMember() throws Exception
 	{
 		assertTrue(r.getMembers().isEmpty());
-		r.newMember("Joe", "Bloggs", "Blogsy", "pass");
+		r.newMember("Joe", "Bloggs", "Blogsy", "pass", "Comedy", 1980);
 		assertTrue(!r.getMembers().isEmpty());
 		assertTrue(r.getMembers().size()==1);
 		loadUp();
 		int size = r.getMembers().size();
-		r.newMember("Joe", "Bloggs", "Blogsy", "pass");
+		r.newMember("Joe", "Bloggs", "Blogsy", "pass", "Comedy", 1980);
 		int newSize = r.getMembers().size();
 		assertTrue(newSize ==(size+1));
 		loadUp();
