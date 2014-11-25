@@ -260,7 +260,6 @@ public class RatingSystem
 		String url = getFilmImage(title);
 		saveImage(url, title);
 		newFilm.setFilmImage("src/images/" + title + ".gif");
-		saveFilms();
 	}
 
 	public void deleteFilm(Film film)
@@ -321,7 +320,6 @@ public class RatingSystem
 			Rating newRating = new Rating(rating, film, member);
 			member.getRatings().put(ID, newRating);
 		}
-		saveMembers();
 	}
 
 	public void logIn(String userName, String password)
@@ -481,6 +479,22 @@ public class RatingSystem
 		Collections.sort(films, BY_TITLE);
 		for (int i = 0; i < films.size(); i++)
 			sortedByTitle.add(films.get(i));
+	}
+
+	public ArrayList<Film> getSortedByTitle() {
+		return sortedByTitle;
+	}
+
+	public void setSortedByTitle(ArrayList<Film> sortedByTitle) {
+		this.sortedByTitle = sortedByTitle;
+	}
+
+	public ArrayList<Film> getSortedByYear() {
+		return sortedByYear;
+	}
+
+	public void setSortedByYear(ArrayList<Film> sortedByYear) {
+		this.sortedByYear = sortedByYear;
 	}
 
 	// comparator to sort by title

@@ -10,13 +10,13 @@
 
 <AnchorPane prefHeight="737.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SystemController">
    <children>
-      <TabPane prefHeight="737.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="tabPane" prefHeight="737.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-            <Tab text="Edit Details">
+            <Tab fx:id="tab1" text="Edit Details">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="27.0" layoutY="14.0" prefHeight="87.0" prefWidth="498.0" text="Edit Your Details Here:">
+                        <Label layoutX="23.0" prefHeight="63.0" prefWidth="502.0" text="Edit Your Details Here:">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -38,15 +38,16 @@
                         <PasswordField fx:id="passwordChange" layoutX="348.0" layoutY="195.0" />
                         <PasswordField fx:id="confirmPasswordChange" layoutX="348.0" layoutY="311.0" />
                         <Button layoutX="480.0" layoutY="543.0" mnemonicParsing="false" onMouseClicked="#resetFields" prefHeight="48.0" prefWidth="114.0" text="Reset Fields" />
+                        <Separator layoutX="22.0" layoutY="63.0" prefHeight="14.0" prefWidth="975.0" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab text="Rate Films">
+          <Tab fx:id="tab2" text="Recommendations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="706.0" prefWidth="1019.0">
                      <children>
-                        <Label layoutX="22.0" layoutY="26.0" prefHeight="41.0" prefWidth="514.0" text="Rate Films">
+                        <Label layoutX="22.0" layoutY="14.0" prefHeight="41.0" prefWidth="514.0" text="Recommendations">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -67,39 +68,142 @@
                               <Button fx:id="rate2" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
-                        <Pane fx:id="filmPanel111" layoutX="32.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
+                        <Pane fx:id="filmPanel3" layoutX="32.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
                               <Label fx:id="film3" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
                               <ImageView fx:id="image3" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate3" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
-                        <Pane fx:id="filmPanel112" layoutX="547.0" layoutY="67.0" prefHeight="177.0" prefWidth="429.0">
+                        <Pane fx:id="filmPanel4" layoutX="547.0" layoutY="67.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
                               <Label fx:id="film4" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
                               <ImageView fx:id="image4" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate4" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
-                        <Pane fx:id="filmPanel1121" layoutX="547.0" layoutY="256.0" prefHeight="177.0" prefWidth="429.0">
+                        <Pane fx:id="filmPanel5" layoutX="547.0" layoutY="256.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
                               <Label fx:id="film5" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
                               <ImageView fx:id="image5" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate5" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
-                        <Pane fx:id="filmPanel1122" layoutX="547.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
+                        <Pane fx:id="filmPanel6" layoutX="547.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
                               <Label fx:id="film6" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
                               <ImageView fx:id="image6" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate6" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
+                        <Separator layoutX="22.0" layoutY="66.0" prefHeight="2.0" prefWidth="978.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Film Management">
+            <Tab fx:id="tab3" text="Search">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.29797979797979796" layoutX="172.0" layoutY="118.0" prefHeight="704.0" prefWidth="1019.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label layoutX="21.0" layoutY="7.0" prefHeight="58.0" prefWidth="217.0" text="Film Search">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="19.0" layoutY="65.0" prefHeight="15.0" prefWidth="262.0" />
+                                    <TextField fx:id="titleSearchTerm" layoutX="19.0" layoutY="108.0" promptText="Search By Title" />
+                                    <Button layoutX="19.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#searchByTitle" text="Search" />
+                                    <Label layoutX="21.0" layoutY="242.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="or">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="genreSearchTerm" layoutX="19.0" layoutY="310.0" promptText="Search By Genre" />
+                                    <Button layoutX="21.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#searchByGenre" text="Search" />
+                                    <Label fx:id="noSearchTerm" layoutX="21.0" layoutY="429.0" prefHeight="192.0" prefWidth="199.0" textFill="#ee0606" wrapText="true">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label layoutX="20.0" layoutY="6.0" prefHeight="58.0" prefWidth="217.0" text="All Movies">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="20.0" layoutY="70.0" prefHeight="8.0" prefWidth="677.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tab4" text="Search Results">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="6.0" layoutY="6.0" prefHeight="63.0" prefWidth="310.0" text="Search Results" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="703.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="noResults" layoutX="14.0" layoutY="61.0" prefHeight="16.0" prefWidth="605.0" textFill="#ee0606" />
+                        <SplitPane dividerPositions="0.4532940019665683" layoutX="173.0" layoutY="84.0" prefHeight="620.0" prefWidth="1019.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="84.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <ScrollPane layoutX="114.0" layoutY="109.0" prefHeight="618.0" prefWidth="457.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <ListView fx:id="searchResults" layoutX="14.0" layoutY="14.0" onMouseClicked="#selectFilm" prefHeight="609.0" prefWidth="452.0" AnchorPane.bottomAnchor="-409.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-252.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Pane layoutX="20.0" layoutY="14.0" prefHeight="618.0" prefWidth="552.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="filmTitleLabel" layoutX="38.0" layoutY="34.0" prefHeight="97.0" prefWidth="444.0" style="-fx-font-size: 18; -fx-font-weight: bold;" wrapText="true">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ImageView fx:id="filmImage" fitHeight="175.0" fitWidth="251.0" layoutX="38.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ChoiceBox fx:id="rateFilm" layoutX="313.0" layoutY="226.0" onMouseClicked="#expandRatings" prefWidth="150.0" />
+                                          <Label layoutX="313.0" layoutY="177.0" text="Rate this film?" />
+                                          <Button layoutX="313.0" layoutY="296.0" mnemonicParsing="false" onMouseClicked="#rateFilm" text="Rate" />
+                                          <Label fx:id="successfulRating" layoutX="313.0" layoutY="385.0" prefHeight="71.0" prefWidth="153.0" textFill="#19d038" wrapText="true">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tab5" text="My Films">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="tab6" text="Film Management">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
