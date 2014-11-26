@@ -12,10 +12,6 @@
 *.war
 *.ear
 
-src/backup/
-src/files/testerFilms.json
-src/files/testerMembers.json
-
 bin/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
