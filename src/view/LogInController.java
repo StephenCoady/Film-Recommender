@@ -114,9 +114,11 @@ public class LogInController implements Initializable
 	{
 		if(desiredPassword.getText().equals(reEnteredPassword.getText()) && Integer.valueOf(yearPreference.getText()) instanceof Integer)
 		{
-			r.newMember(firstName.getText(), secondName.getText(), desiredUserName.getText(), desiredPassword.getText(), genrePreference.getValue(), Integer.valueOf(yearPreference.getText()));
+			Member member = r.newMember(firstName.getText(), secondName.getText(), desiredUserName.getText(), desiredPassword.getText(), genrePreference.getValue(), Integer.valueOf(yearPreference.getText()));
+			loggedIn = member;
 			((Node)(event.getSource())).getScene().getWindow().hide();
 			startUp();
+			r.saveMembers();
 		}
 		else if (firstName.getText().equals(null) 
 				|| secondName.getText().equals(null) 
@@ -141,10 +143,12 @@ public class LogInController implements Initializable
 		mainStage.setScene(scene);
 		mainStage.show();
 	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		genrePreference.setItems(list);
 		genrePreference.setValue(list.get(0));
+		r.loadFilms();
 		r.loadMembers();
 	}
 }

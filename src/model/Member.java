@@ -22,6 +22,8 @@ public class Member
 		this.accountName = accountName;
 		this.password = password;
 		this.ratings = new HashMap<Integer, Rating>();
+		this.genrePreference = genrePreference;
+		this.yearPreference = yearPreference;
 	}
 
 	public HashMap<Integer, Rating> getRatings() 
@@ -88,7 +90,7 @@ public class Member
 	public String toString() {
 		return "Member [firstName=" + firstName + ", secondName=" + secondName
 				+ ", accountName=" + accountName + ", password=" + password
-				+ ", loggedIn=" + loggedIn + ", number of ratings: " + ratings.size() +"]";
+				+ ", loggedIn=" + loggedIn + ", number of ratings: " + ratings.size() + "genre: " + genrePreference + "year: "+ yearPreference +"]";
 	}
 
 	public boolean isLoggedIn() 

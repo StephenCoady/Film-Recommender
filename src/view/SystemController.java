@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
-
-
 import model.Film;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +37,10 @@ public class SystemController implements Initializable
 	private Tab tab4 = new Tab();
 	@FXML
 	private Tab tab5 = new Tab();
+	@FXML
+	private Tab tab6 = new Tab();
+	@FXML
+	private Tab tab7 = new Tab();
 
 	@FXML
 	private static RatingSystem r = new RatingSystem();
@@ -63,6 +63,9 @@ public class SystemController implements Initializable
 
 	@FXML
 	private ImageView filmImage = new ImageView();
+
+	@FXML
+	private ImageView filmChoiceImage = new ImageView();
 
 	@FXML
 	private TextField secondNameChange = new TextField();
@@ -104,6 +107,9 @@ public class SystemController implements Initializable
 	private ChoiceBox<String> rateFilm = new ChoiceBox<String>();
 
 	@FXML
+	private ChoiceBox<String> filmChoiceRating = new ChoiceBox<String>();
+
+	@FXML
 	private Label incorrectUser = new Label();
 
 	@FXML
@@ -124,6 +130,15 @@ public class SystemController implements Initializable
 	@FXML
 	private Label filmTitleLabel = new Label();
 
+	@FXML
+	private Label filmChoiceTitle = new Label();
+
+	@FXML
+	private Label userId = new Label();
+
+	@FXML
+	private Label selectedFilmMessage = new Label();
+
 	private SingleSelectionModel<Tab> selectionModel;
 
 
@@ -137,6 +152,12 @@ public class SystemController implements Initializable
 	private void expandRatings(MouseEvent event)
 	{
 		rateFilm.show();
+	}
+
+	@FXML
+	private void expandChoiceRatings(MouseEvent event)
+	{
+		filmChoiceRating.show();
 	}
 
 	@FXML
@@ -235,6 +256,81 @@ public class SystemController implements Initializable
 		else
 		{
 			filmImage.setImage(image);
+		}
+	}
+
+	@FXML
+	private void showSelectedFilm(MouseEvent event)
+	{
+		String filmTitle;
+		if(filmsByTitle.getSelectionModel().getSelectedItem() != null)
+		{
+			filmTitle = filmsByTitle.getSelectionModel().getSelectedItem();
+		}
+		else
+		{
+			filmTitle = filmsByYear.getSelectionModel().getSelectedItem().substring(0, filmsByYear.getSelectionModel().getSelectedItem().length()-7);
+		}
+		selectedFilmMessage.setText("");
+		if(event.getClickCount()>1)
+		{
+			selectionModel.select(5);
+			filmChoiceRating.setItems(ratingsList);
+			Film film = null;
+			filmChoiceTitle.setText(filmTitle);
+			for(int i = 0;i<r.getFilms().size();i++)
+			{
+				if(r.getFilms().get(i).getTitle().equals(filmTitle))
+				{
+					film = r.getFilms().get(i);
+					break;
+				}
+			}
+			Image image = new Image("file:"+film.getFilmImage());
+			if(image.getHeight()==0)
+			{
+				image = new Image("file:src/images/no_image_available.jpg");
+				filmChoiceImage.setImage(image);
+			}
+			else
+			{
+				filmChoiceImage.setImage(image);
+			}
+		}
+	}
+
+	@FXML
+	private void rateSelectedFilm(MouseEvent event)
+	{
+		Film film = null;
+		if(!filmChoiceTitle.equals(null))
+		{
+			for(int i = 0;i<r.getFilms().size();i++)
+			{
+				if(r.getFilms().get(i).getTitle().equals(filmChoiceTitle.getText()))
+				{
+					film = r.getFilms().get(i);
+					break;
+				}
+			}
+		}
+		if(film!=null)
+		{
+			if(filmChoiceRating.getValue()!=null)
+			{
+				try {
+					r.newRating(r.getLoggedIn(), film, Integer.valueOf(filmChoiceRating.getValue()));
+					selectedFilmMessage.setText("Rating Successful!");
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				selectedFilmMessage.setText("Please choose a value!");
+			}
 		}
 	}
 
@@ -362,6 +458,7 @@ public class SystemController implements Initializable
 		r.loadMembers();
 		r.loadFilms();
 		r.setLoggedIn(LogInController.getLoggedIn());
+		userId.setText("Welcome, " + r.getLoggedIn().getFirstName() + ".");
 		if(!r.getLoggedIn().getRatings().isEmpty())
 		{
 			r.getSimilarMembers();

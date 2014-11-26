@@ -16,7 +16,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="29.0" layoutY="14.0" text="Welcome">
+                        <Label fx:id="userId" layoutX="29.0" layoutY="14.0" prefHeight="31.0" prefWidth="402.0" text="Welcome">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -161,7 +161,7 @@
                                              <children>
                                                 <ScrollPane prefHeight="632.0" prefWidth="345.0">
                                                    <content>
-                                                      <ListView fx:id="filmsByTitle" prefHeight="573.0" prefWidth="343.0" />
+                                                      <ListView fx:id="filmsByTitle" onMouseClicked="#showSelectedFilm" prefHeight="573.0" prefWidth="343.0" />
                                                    </content>
                                                 </ScrollPane>
                                              </children>
@@ -170,7 +170,7 @@
                                              <children>
                                                 <ScrollPane prefHeight="632.0" prefWidth="339.0">
                                                    <content>
-                                                      <ListView fx:id="filmsByYear" prefHeight="572.0" prefWidth="338.0" />
+                                                      <ListView fx:id="filmsByYear" onMouseClicked="#showSelectedFilm" prefHeight="572.0" prefWidth="338.0" />
                                                    </content>
                                                 </ScrollPane>
                                              </children>
@@ -246,12 +246,33 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab6" text="Film Management">
+            <Tab fx:id="tab6" text="Rate a Film">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="filmLabel" layoutX="20.0" layoutY="14.0" prefHeight="48.0" prefWidth="363.0" text="Rate a Film">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="20.0" layoutY="75.0" prefHeight="0.0" prefWidth="977.0" />
+                        <ImageView fx:id="filmChoiceImage" fitHeight="262.0" fitWidth="355.0" layoutX="85.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="filmChoiceTitle" layoutX="510.0" layoutY="135.0" prefHeight="94.0" prefWidth="204.0" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="filmChoiceRating" layoutX="746.0" layoutY="169.0" onMouseClicked="#expandChoiceRatings" prefWidth="150.0" />
+                        <Button layoutX="746.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#rateSelectedFilm" prefHeight="30.0" prefWidth="93.0" text="Rate" />
+                        <Label fx:id="selectedFilmMessage" layoutX="746.0" layoutY="433.0" prefHeight="64.0" prefWidth="204.0" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab7" text="My FIlms">
+            <Tab fx:id="tab7" text="My Films">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>

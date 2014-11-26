@@ -57,17 +57,8 @@ public class RatingSystem
 	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
 	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
 
-	
-//	public static void main(String[] args) throws IOException
-//	{
-//		RatingSystem system = new RatingSystem();
-//		system.run();
-//	}
-//
-//	private void run() throws IOException
-//	{
-//		loadMembers();
-//	}
+
+
 
 	public void loadMembers()
 	{
@@ -85,10 +76,11 @@ public class RatingSystem
 				String obj5  = (String) newArray.get(3); // password
 				String obj6  = (String) newArray.get(4); // genre preference
 
+
 				Long obj7  = (Long) newArray.get(5);     // year preference
 				String stringPref = Long.toString(obj7);
 				int pref;
-				if(stringPref==null)
+				if(stringPref.equals(null))
 				{
 					pref = 0;
 				}
@@ -98,7 +90,6 @@ public class RatingSystem
 				}
 				Member newMember = new Member(obj3, obj4, obj2, obj5, obj6, pref);
 				members.add(newMember);
-
 				//deals with the member's ratings
 				Object keyArray = newArray.get(6);
 				JSONObject jsonObject2 = (JSONObject) keyArray;
@@ -256,11 +247,11 @@ public class RatingSystem
 		}
 	}
 
-	public void newMember(String firstName, String secondName, String accountName, String password, String genrePref, int yearPref) throws IOException
+	public Member newMember(String firstName, String secondName, String accountName, String password, String genrePref, int yearPref) throws IOException
 	{
 		Member newMember = new Member(firstName, secondName, accountName, password, genrePref, yearPref);
 		members.add(newMember);
-		saveMembers();
+		return newMember;
 	}
 
 	public void newFilm(String title, int year, String genre) throws IOException
@@ -288,25 +279,10 @@ public class RatingSystem
 	{
 		Member member = members.get(userID);
 		int ID = film.getID();
-		if(!member.getRatings().containsKey(ID))
-		{
-			film.addRating(rating);
-			ratings.put(ID, film.getSumOfRatings());
-			Rating newRating = new Rating(rating, film, member);
-			member.getRatings().put(ID, newRating);
-		}
-		/*
-		 * if the member has already rated this film, their previous rating 
-		 * will not be reflected in that films total ratings
-		 */
-		else
-		{
-			film.subtractRating(member.getRatings().get(ID).getRating());
-			film.addRating(rating);
-			ratings.put(ID, film.getSumOfRatings());
-			Rating newRating = new Rating(rating, film, member);
-			member.getRatings().put(ID, newRating);
-		}
+		film.addRating(rating);
+		ratings.put(ID, film.getSumOfRatings());
+		Rating newRating = new Rating(rating, film, member);
+		member.getRatings().put(ID, newRating);
 	}
 
 	public void newRating(Member member, Film film, int rating) throws IOException
