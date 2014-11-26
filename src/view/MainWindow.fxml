@@ -12,7 +12,23 @@
    <children>
       <TabPane fx:id="tabPane" prefHeight="737.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-            <Tab fx:id="tab1" text="Edit Details">
+           <Tab fx:id="tab1" text="Welcome">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="29.0" layoutY="14.0" text="Welcome">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="27.0" layoutY="63.0" prefHeight="9.0" prefWidth="965.0" />
+                        <Label layoutX="29.0" layoutY="107.0" text="What would you like to do?" />
+                        <Label layoutX="29.0" layoutY="155.0" text="Edit Details" />
+                        <Button layoutX="27.0" layoutY="193.0" mnemonicParsing="false" text="Edit" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tab2" text="Edit Details">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -43,7 +59,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab fx:id="tab2" text="Recommendations">
+          <Tab fx:id="tab3" text="Recommendations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="706.0" prefWidth="1019.0">
                      <children>
@@ -101,7 +117,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tab3" text="Search">
+            <Tab fx:id="tab4" onSelectionChanged="#sortAllFilms" text="Search">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -139,6 +155,38 @@
                                        </font>
                                     </Label>
                                     <Separator layoutX="20.0" layoutY="70.0" prefHeight="8.0" prefWidth="677.0" />
+                                    <SplitPane dividerPositions="0.5028985507246376" layoutX="20.0" layoutY="126.0" prefHeight="577.0" prefWidth="692.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ScrollPane prefHeight="632.0" prefWidth="345.0">
+                                                   <content>
+                                                      <ListView fx:id="filmsByTitle" prefHeight="573.0" prefWidth="343.0" />
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ScrollPane prefHeight="632.0" prefWidth="339.0">
+                                                   <content>
+                                                      <ListView fx:id="filmsByYear" prefHeight="572.0" prefWidth="338.0" />
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                    <Label layoutX="20.0" layoutY="86.0" text="By Title:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="374.0" layoutY="86.0" text="By Year:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                           </items>
@@ -146,7 +194,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab4" text="Search Results">
+            <Tab fx:id="tab5" text="Search Results">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -198,12 +246,12 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab5" text="My Films">
+            <Tab fx:id="tab6" text="Film Management">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
             </Tab>
-            <Tab fx:id="tab6" text="Film Management">
+            <Tab fx:id="tab7" text="My FIlms">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>

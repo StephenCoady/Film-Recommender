@@ -7,16 +7,12 @@ import java.util.ResourceBundle;
 
 
 
-import model.Member;
+
 import model.Film;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -28,8 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import controller.RatingSystem;
 import edu.princeton.cs.introcs.StdOut;
 
@@ -51,35 +45,12 @@ public class SystemController implements Initializable
 	@FXML
 	private static RatingSystem r = new RatingSystem();
 
-	@FXML
-	private TextField userName = new TextField();
-
-	@FXML
-	private PasswordField passwordEntry = new PasswordField();
-
-	@FXML
-	private TextField firstName = new TextField();
-
-	@FXML
-	private TextField secondName = new TextField();
-
-	@FXML
-	private TextField desiredUserName = new TextField();
-
-	@FXML
-	private PasswordField desiredPassword = new PasswordField();
-
-	@FXML
-	private PasswordField reEnteredPassword = new PasswordField();
 
 	@FXML
 	private ChoiceBox<String> genrePreference = new ChoiceBox<String>();
 
 	@FXML
 	private ChoiceBox<String> genreChange = new ChoiceBox<String>();
-
-	@FXML
-	private TextField yearPreference = new TextField();
 
 	@FXML
 	private PasswordField passwordChange = new PasswordField();
@@ -109,6 +80,12 @@ public class SystemController implements Initializable
 	private ListView<String> searchResults = new ListView<String>();
 
 	@FXML
+	private ListView<String> filmsByTitle = new ListView<String>();
+
+	@FXML
+	private ListView<String> filmsByYear = new ListView<String>();
+
+	@FXML
 	private TextField yearChange = new TextField();
 
 	final ObservableList<String> list = FXCollections.observableArrayList(
@@ -118,6 +95,10 @@ public class SystemController implements Initializable
 	final ObservableList<String> ratingsList = FXCollections.observableArrayList(
 			"5","3","1","0","-3","-5"
 			);
+
+	private ObservableList<String> filmsByTitleList = FXCollections.observableArrayList();
+
+	private ObservableList<String> filmsByYearList = FXCollections.observableArrayList();
 
 	@FXML
 	private ChoiceBox<String> rateFilm = new ChoiceBox<String>();
@@ -146,7 +127,6 @@ public class SystemController implements Initializable
 	private SingleSelectionModel<Tab> selectionModel;
 
 
-
 	@FXML
 	private void expandGenres(MouseEvent event)
 	{
@@ -157,69 +137,6 @@ public class SystemController implements Initializable
 	private void expandRatings(MouseEvent event)
 	{
 		rateFilm.show();
-	}
-
-	@FXML
-	private void signIn(MouseEvent event) throws IOException 
-	{
-		Member member = null;
-		for(int i = 0; i<r.getMembers().size();i++)
-		{
-			if(r.getMembers().get(i).getAccountName().equals(userName.getText()))
-			{
-				member = r.getMembers().get(i);
-				break;
-			}
-		}
-		if(member!= null && member.getPassword().equals(passwordEntry.getText()))
-		{
-			r.logIn(userName.getText(), passwordEntry.getText());
-			((Node)(event.getSource())).getScene().getWindow().hide();
-			startUp();
-		}
-		else
-		{
-			incorrectUser.setText("Incorrect username or password. Try again.");
-		}
-	}
-
-	@FXML
-	private void signUp(MouseEvent event) throws IOException 
-	{
-		if(desiredPassword.getText().equals(reEnteredPassword.getText()) && Integer.valueOf(yearPreference.getText()) instanceof Integer)
-		{
-			r.newMember(firstName.getText(), secondName.getText(), desiredUserName.getText(), desiredPassword.getText(), genrePreference.getValue(), Integer.valueOf(yearPreference.getText()));
-			((Node)(event.getSource())).getScene().getWindow().hide();
-			startUp();
-		}
-		else if (firstName.getText().equals(null) 
-				|| secondName.getText().equals(null) 
-				|| desiredUserName.getText().equals(null)
-				|| desiredPassword.getText().equals(null) 
-				|| !(Integer.valueOf(yearChange.getText()) instanceof Integer))
-		{
-			noSignUp.setText("Please complete all fields.");
-		}
-		else if(!desiredPassword.getText().equals(reEnteredPassword.getText()))
-		{
-			noSignUp.setText("Passwords do not match. Try again.");
-		}
-	}
-
-	private void startUp() throws IOException
-	{
-		r.loadFilms();
-		r.sortByTitle();
-		r.sortByYear();
-		r.getListOfSimilarMembers();
-		r.getFilmRecommendations();
-		r.getBetterRecommendations();
-		Stage mainStage = new Stage();
-		mainStage.setTitle("Film Recommender");
-		Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-		Scene scene = new Scene(root);
-		mainStage.setScene(scene);
-		mainStage.show();
 	}
 
 	@FXML
@@ -237,7 +154,6 @@ public class SystemController implements Initializable
 			r.getLoggedIn().setPassword(passwordChange.getText());
 			r.getLoggedIn().setYearPreference(Integer.valueOf(yearChange.getText()));
 			r.getLoggedIn().setGenrePreference(genreChange.getValue());
-			StdOut.println(r.getLoggedIn().toString());
 		}
 		else if (firstNameChange.getText().equals(null)
 				|| secondNameChange.getText().equals(null)
@@ -268,11 +184,12 @@ public class SystemController implements Initializable
 	private void searchByTitle(MouseEvent event)
 	{
 		ObservableList<String> foundFilms = FXCollections.observableArrayList();
+
 		if(!titleSearchTerm.getText().toLowerCase().isEmpty())
 		{
 			for(int i = 0;i<r.getFilms().size();i++)
 			{
-				if(r.getFilms().get(i).getTitle().contains(titleSearchTerm.getText().toLowerCase()))
+				if(r.getFilms().get(i).getTitle().toLowerCase().contains(titleSearchTerm.getText().toLowerCase()))
 				{
 					foundFilms.add(r.getFilms().get(i).getTitle());
 				}
@@ -285,7 +202,7 @@ public class SystemController implements Initializable
 
 		if(!foundFilms.isEmpty())
 		{
-			selectionModel.select(3);
+			selectionModel.select(4);
 			searchResults.setItems(foundFilms);
 		}
 		else if (r.getFilms().isEmpty())
@@ -297,7 +214,7 @@ public class SystemController implements Initializable
 	@FXML
 	private void selectFilm(MouseEvent event)
 	{
-		successfulRating.setText(" ");
+		successfulRating.setText("");
 		Film film = null;
 		String filmTitle = searchResults.getSelectionModel().getSelectedItem();
 		filmTitleLabel.setText(filmTitle);
@@ -329,7 +246,7 @@ public class SystemController implements Initializable
 		{
 			for(int i = 0;i<r.getFilms().size();i++)
 			{
-				if(r.getFilms().get(i).getGenre().contains(genreSearchTerm.getText().toLowerCase()))
+				if(r.getFilms().get(i).getGenre().toLowerCase().contains(genreSearchTerm.getText().toLowerCase()))
 				{
 					foundFilms.add(r.getFilms().get(i).getTitle());
 				}
@@ -342,7 +259,7 @@ public class SystemController implements Initializable
 
 		if(!foundFilms.isEmpty())
 		{
-			selectionModel.select(3);
+			selectionModel.select(4);
 			searchResults.setItems(foundFilms);
 		}
 		else if (r.getFilms().isEmpty())
@@ -381,8 +298,57 @@ public class SystemController implements Initializable
 			}
 			else
 			{
-				successfulRating.setText("Please Choose a value!");
+				successfulRating.setText("Please choose a value!");
 			}
+		}
+	}
+
+	@FXML
+	private void sortAllFilms()
+	{
+		addFilmsByTitle();
+		addFilmsByYear();
+	}
+
+	private void addFilmsByTitle()
+	{
+		if(filmsByTitleList.isEmpty())
+		{
+			for(int i = 0;i<r.getSortedByTitle().size();i++)
+			{
+				filmsByTitleList.add(r.getSortedByTitle().get(i).getTitle());
+			}
+			filmsByTitle.setItems(filmsByTitleList);
+		}
+		else
+		{
+			filmsByTitleList.clear();
+			for(int i = 0;i<r.getSortedByTitle().size();i++)
+			{
+				filmsByTitleList.add(r.getSortedByTitle().get(i).getTitle());
+			}
+			filmsByTitle.setItems(filmsByTitleList);
+		}
+	}
+
+	private void addFilmsByYear()
+	{
+		if(filmsByYearList.isEmpty())
+		{
+			for(int i = 0;i<r.getSortedByYear().size();i++)
+			{
+				filmsByYearList.add(r.getSortedByYear().get(i).getTitle() + " (" + Integer.toString(r.getSortedByYear().get(i).getYear()) + ")");
+			}
+			filmsByYear.setItems(filmsByYearList);
+		}
+		else
+		{
+			filmsByYearList.clear();
+			for(int i = 0;i<r.getSortedByYear().size();i++)
+			{
+				filmsByYearList.add(r.getSortedByYear().get(i).getTitle() + " (" + Integer.toString(r.getSortedByYear().get(i).getYear()) + ")");
+			}
+			filmsByYear.setItems(filmsByYearList);
 		}
 	}
 
@@ -394,6 +360,15 @@ public class SystemController implements Initializable
 		rateFilm.setItems(ratingsList);
 		selectionModel = tabPane.getSelectionModel();
 		r.loadMembers();
-		StdOut.println(r.getFilms().size());
+		r.loadFilms();
+		r.setLoggedIn(LogInController.getLoggedIn());
+		if(!r.getLoggedIn().getRatings().isEmpty())
+		{
+			r.getSimilarMembers();
+			r.getFilmRecommendations();
+			r.getBetterRecommendations();
+		}
+		r.sortByTitle();
+		r.sortByYear();
 	}
 }

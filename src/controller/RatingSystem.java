@@ -58,6 +58,16 @@ public class RatingSystem
 	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
 
 	
+//	public static void main(String[] args) throws IOException
+//	{
+//		RatingSystem system = new RatingSystem();
+//		system.run();
+//	}
+//
+//	private void run() throws IOException
+//	{
+//		loadMembers();
+//	}
 
 	public void loadMembers()
 	{
@@ -187,7 +197,7 @@ public class RatingSystem
 
 				String genre = (String) newArray.get(3);
 				String imageLocation = (String) newArray.get(4);
-				
+
 				if(imageLocation.equals("src/images/no_image_available.jpg"))
 				{
 					imageLocation = getFilmImage(title);
@@ -648,7 +658,7 @@ public class RatingSystem
 		this.loggedIn = loggedIn;
 	}
 
-	
+
 	public String getLoadMembersLocation() {
 		return loadMembersLocation;
 	}
