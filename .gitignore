@@ -4,13 +4,17 @@
 .mtj.tmp/
 
 # Image files#
-
 *.gif
+*.jpg
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
+src/backup/
+src/files/testerFilms.json
+src/files/testerMembers.json
 
 bin/
 
