@@ -36,6 +36,8 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import view.LogInController;
+
 
 public class RatingSystem
 {
@@ -59,6 +61,33 @@ public class RatingSystem
 
 
 
+	public static void main(String[] args)
+	{
+		RatingSystem r = new RatingSystem();
+		r.loadFilms();
+		r.loadMembers();
+		r.setLoggedIn(r.getMembers().get(0));
+		r.getSimilarMembers();
+		StdOut.println(r.getListOfSimilarMembers().size());
+
+		r.getFilmRecommendations();
+//		for(int i = 0; i<r.getMembers().size(); i++)
+//		{
+//			StdOut.println(r.getMembers().get(i).getRatings().size());
+//		}
+//		for(int i = 0; i<r.getRecommendedFilms().size(); i++)
+//		{
+//			StdOut.println(r.getRecommendedFilms().get(i).getTitle());
+//		}
+		r.getBetterRecommendations();
+//		for(int i = 0; i<r.getBetterRecommendedFilms().size(); i++)
+//		{
+//			StdOut.println(r.getBetterRecommendedFilms().get(i).getTitle());
+//		}
+		r.sortByTitle();
+		r.sortByYear();
+	}
+	
 
 	public void loadMembers()
 	{
@@ -193,7 +222,6 @@ public class RatingSystem
 				{
 					imageLocation = getFilmImage(title);
 					imageLocation = saveImage(imageLocation, title);
-					StdOut.println(i+1);
 				}
 
 				Film film = new Film(ID, title, year, genre);

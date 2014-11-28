@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import controller.RatingSystem;
 import edu.princeton.cs.introcs.StdOut;
 
@@ -141,6 +142,66 @@ public class SystemController implements Initializable
 
 	private SingleSelectionModel<Tab> selectionModel;
 
+	@FXML
+	private Pane filmPanel1 = new Pane();
+
+	@FXML
+	private Label film1 = new Label();
+
+	@FXML
+	private ImageView image1 = new ImageView();	
+
+	@FXML
+	private Pane filmPanel2 = new Pane();
+
+	@FXML
+	private Label film2 = new Label();
+
+	@FXML
+	private ImageView image2 = new ImageView();
+
+	@FXML
+	private Pane filmPanel3 = new Pane();
+
+	@FXML
+	private Label film3 = new Label();
+
+	@FXML
+	private ImageView image3 = new ImageView();
+
+	@FXML
+	private Pane filmPanel4 = new Pane();
+
+	@FXML
+	private Label film4 = new Label();
+
+	@FXML
+	private ImageView image4 = new ImageView();
+
+	@FXML
+	private Pane filmPanel5 = new Pane();
+
+	@FXML
+	private Label film5 = new Label();
+
+	@FXML
+	private ImageView image5 = new ImageView();
+
+	@FXML
+	private Pane filmPanel6 = new Pane();
+
+	@FXML
+	private Label film6 = new Label();
+
+	@FXML
+	private ImageView image6 = new ImageView();
+
+	private int loggedInIndex;
+
+	public SystemController(int loggedInIndex) 
+	{
+		this.loggedInIndex = loggedInIndex;
+	}
 
 	@FXML
 	private void expandGenres(MouseEvent event)
@@ -448,6 +509,28 @@ public class SystemController implements Initializable
 		}
 	}
 
+	@FXML
+	private void getRecommendations()
+	{
+		if(!r.getBetterRecommendedFilms().isEmpty())
+		{
+			filmPanel1.setVisible(true);
+			filmPanel2.setVisible(true);
+			filmPanel3.setVisible(true);
+			filmPanel4.setVisible(true);
+			filmPanel5.setVisible(true);
+			filmPanel6.setVisible(true);
+
+			film1.setText(r.getBetterRecommendedFilms().get(0).getTitle());
+			film2.setText(r.getBetterRecommendedFilms().get(1).getTitle());
+			film3.setText(r.getBetterRecommendedFilms().get(2).getTitle());
+			film4.setText(r.getBetterRecommendedFilms().get(3).getTitle());
+			film5.setText(r.getBetterRecommendedFilms().get(4).getTitle());
+			film6.setText(r.getBetterRecommendedFilms().get(5).getTitle());
+
+		}
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		genrePreference.setItems(list);
@@ -455,15 +538,30 @@ public class SystemController implements Initializable
 		genreChange.setItems(list);
 		rateFilm.setItems(ratingsList);
 		selectionModel = tabPane.getSelectionModel();
-		r.loadMembers();
 		r.loadFilms();
-		r.setLoggedIn(LogInController.getLoggedIn());
+		r.loadMembers();
+		r.setLoggedIn(r.getMembers().get(loggedInIndex));;
+		filmPanel1.setVisible(false);
+		filmPanel2.setVisible(false);
+		filmPanel3.setVisible(false);
+		filmPanel4.setVisible(false);
+		filmPanel5.setVisible(false);
+		filmPanel6.setVisible(false);
 		userId.setText("Welcome, " + r.getLoggedIn().getFirstName() + ".");
-		if(!r.getLoggedIn().getRatings().isEmpty())
+		r.getSimilarMembers();
+		r.getFilmRecommendations();
+		StdOut.println("Recommendations:");
+		StdOut.println("---------------------");
+		for(int i = 0; i<r.getRecommendedFilms().size(); i++)
 		{
-			r.getSimilarMembers();
-			r.getFilmRecommendations();
-			r.getBetterRecommendations();
+			StdOut.println(r.getRecommendedFilms().get(i).getTitle());
+		}
+		r.getBetterRecommendations();
+		StdOut.println("Better Recommendations:");
+		StdOut.println("---------------------");
+		for(int i = 0; i<r.getBetterRecommendedFilms().size(); i++)
+		{
+			StdOut.println(r.getBetterRecommendedFilms().get(i).getTitle());
 		}
 		r.sortByTitle();
 		r.sortByYear();

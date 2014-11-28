@@ -20,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import controller.RatingSystem;
-import edu.princeton.cs.introcs.StdOut;
 
 public class LogInController implements Initializable
 {	
@@ -71,8 +70,7 @@ public class LogInController implements Initializable
 	@FXML
 	private Label incorrectDetails = new Label();
 
-
-	private static Member loggedIn;
+	private int loggedInIndex;
 	
 	@FXML
 	private void expandGenres(MouseEvent event)
@@ -95,7 +93,7 @@ public class LogInController implements Initializable
 		if(member!= null && member.getPassword().equals(passwordEntry.getText()))
 		{
 			r.logIn(userName.getText(), passwordEntry.getText());
-			loggedIn = r.getLoggedIn();
+			loggedInIndex = r.getMembers().indexOf(member);
 			((Node)(event.getSource())).getScene().getWindow().hide();
 			startUp();
 		}
@@ -105,9 +103,6 @@ public class LogInController implements Initializable
 		}
 	}
 
-	public static Member getLoggedIn() {
-		return loggedIn;
-	}
 
 	@FXML
 	private void signUp(MouseEvent event) throws IOException 
@@ -115,7 +110,7 @@ public class LogInController implements Initializable
 		if(desiredPassword.getText().equals(reEnteredPassword.getText()) && Integer.valueOf(yearPreference.getText()) instanceof Integer)
 		{
 			Member member = r.newMember(firstName.getText(), secondName.getText(), desiredUserName.getText(), desiredPassword.getText(), genrePreference.getValue(), Integer.valueOf(yearPreference.getText()));
-			loggedIn = member;
+			loggedInIndex = r.getMembers().indexOf(member);
 			((Node)(event.getSource())).getScene().getWindow().hide();
 			startUp();
 			r.saveMembers();
@@ -136,9 +131,20 @@ public class LogInController implements Initializable
 
 	private void startUp() throws IOException
 	{
+		SystemController systemController = 
+			    new SystemController(this.loggedInIndex);
+
+			FXMLLoader loader = new FXMLLoader(
+			    getClass().getResource(
+			        "MainWindow.fxml"
+			    )
+			);
+			loader.setController(systemController);
+
+		
 		Stage mainStage = new Stage();
 		mainStage.setTitle("Film Recommender");
-		Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
 		mainStage.setScene(scene);
 		mainStage.show();

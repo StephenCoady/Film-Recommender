@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="737.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SystemController">
+<AnchorPane prefHeight="737.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane fx:id="tabPane" prefHeight="737.0" prefWidth="1019.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -59,7 +59,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab fx:id="tab3" text="Recommendations">
+          <Tab fx:id="tab3" onSelectionChanged="#getRecommendations" text="Recommendations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="706.0" prefWidth="1019.0">
                      <children>
@@ -68,46 +68,45 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Button layoutX="823.0" layoutY="645.0" mnemonicParsing="false" text="Back" />
-                        <Button layoutX="907.0" layoutY="645.0" mnemonicParsing="false" text="Forward" />
+                        <Button fx:id="more" layoutX="907.0" layoutY="645.0" mnemonicParsing="false" text="More" />
                         <Pane fx:id="filmPanel1" layoutX="32.0" layoutY="67.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
-                              <Label fx:id="film1" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <Label fx:id="film1" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" wrapText="true" />
                               <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate1" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
                         <Pane fx:id="filmPanel2" layoutX="32.0" layoutY="256.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
-                              <Label fx:id="film2" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <Label fx:id="film2" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" wrapText="true" />
                               <ImageView fx:id="image2" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate2" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
                         <Pane fx:id="filmPanel3" layoutX="32.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
-                              <Label fx:id="film3" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <Label fx:id="film3" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" wrapText="true" />
                               <ImageView fx:id="image3" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate3" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
                         <Pane fx:id="filmPanel4" layoutX="547.0" layoutY="67.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
-                              <Label fx:id="film4" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <Label fx:id="film4" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" wrapText="true" />
                               <ImageView fx:id="image4" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate4" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
                         <Pane fx:id="filmPanel5" layoutX="547.0" layoutY="256.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
-                              <Label fx:id="film5" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <Label fx:id="film5" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" wrapText="true" />
                               <ImageView fx:id="image5" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate5" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
                         </Pane>
                         <Pane fx:id="filmPanel6" layoutX="547.0" layoutY="441.0" prefHeight="177.0" prefWidth="429.0">
                            <children>
-                              <Label fx:id="film6" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" />
+                              <Label fx:id="film6" layoutY="53.0" prefHeight="72.0" prefWidth="110.0" text="Film 1" wrapText="true" />
                               <ImageView fx:id="image6" fitHeight="150.0" fitWidth="200.0" layoutX="115.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="rate6" layoutX="360.0" layoutY="76.0" mnemonicParsing="false" text="Rate" />
                            </children>
