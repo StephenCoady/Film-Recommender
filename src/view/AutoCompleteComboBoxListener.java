@@ -1,6 +1,5 @@
 package view;
 
-import edu.princeton.cs.introcs.StdOut;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -8,10 +7,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+@SuppressWarnings("rawtypes")
 public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
 
-    private ComboBox comboBox;
-    private StringBuilder sb;
+	private ComboBox comboBox;
+	@SuppressWarnings("unused")
+	private StringBuilder sb;
     private ObservableList<T> data;
     private boolean moveCaretToPos = false;
     private int caretPos;
@@ -32,7 +33,8 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
         this.comboBox.setOnKeyReleased(AutoCompleteComboBoxListener.this);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void handle(KeyEvent event) {
 
         if(event.getCode() == KeyCode.UP) {
