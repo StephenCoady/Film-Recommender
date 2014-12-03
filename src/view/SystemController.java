@@ -88,6 +88,9 @@ public class SystemController implements Initializable
 
 	@FXML
 	private ListView<String> filmsByYear = new ListView<String>();
+	
+	@FXML
+	private ListView<String> recommendations = new ListView<String>();
 
 	@FXML
 	private TextField yearChange = new TextField();
@@ -103,6 +106,8 @@ public class SystemController implements Initializable
 	private ObservableList<String> filmsByTitleList = FXCollections.observableArrayList();
 
 	private ObservableList<String> filmsByYearList = FXCollections.observableArrayList();
+	
+	private ObservableList<String> recommendedFilms = FXCollections.observableArrayList();
 
 	@FXML
 	private ChoiceBox<String> rateFilm = new ChoiceBox<String>();
@@ -110,6 +115,9 @@ public class SystemController implements Initializable
 	@FXML
 	private ChoiceBox<String> filmChoiceRating = new ChoiceBox<String>();
 
+	@FXML
+	private ChoiceBox<String> recommendedRating = new ChoiceBox<String>();
+	
 	@FXML
 	private Label incorrectUser = new Label();
 
@@ -121,6 +129,15 @@ public class SystemController implements Initializable
 
 	@FXML
 	private Label noResults = new Label();
+	
+	@FXML
+	private Label recommendedTitle = new Label();
+	
+	@FXML
+	private Pane searchPane = new Pane();
+	
+	@FXML
+	private Pane recommendedPane = new Pane();
 
 	@FXML
 	private Label successfulRating = new Label();
@@ -136,6 +153,9 @@ public class SystemController implements Initializable
 
 	@FXML
 	private Label userId = new Label();
+	
+	@FXML
+	private Label successfulRecRating = new Label();
 
 	@FXML
 	private Label selectedFilmMessage = new Label();
@@ -146,7 +166,7 @@ public class SystemController implements Initializable
 	private Pane filmPanel1 = new Pane();
 
 	@FXML
-	private Label film1 = new Label();
+	private Label filmTitle1 = new Label();
 
 	@FXML
 	private ImageView image1 = new ImageView();	
@@ -155,7 +175,7 @@ public class SystemController implements Initializable
 	private Pane filmPanel2 = new Pane();
 
 	@FXML
-	private Label film2 = new Label();
+	private Label filmTitle2 = new Label();
 
 	@FXML
 	private ImageView image2 = new ImageView();
@@ -164,7 +184,7 @@ public class SystemController implements Initializable
 	private Pane filmPanel3 = new Pane();
 
 	@FXML
-	private Label film3 = new Label();
+	private Label filmTitle3 = new Label();
 
 	@FXML
 	private ImageView image3 = new ImageView();
@@ -173,7 +193,7 @@ public class SystemController implements Initializable
 	private Pane filmPanel4 = new Pane();
 
 	@FXML
-	private Label film4 = new Label();
+	private Label filmTitle4 = new Label();
 
 	@FXML
 	private ImageView image4 = new ImageView();
@@ -182,7 +202,7 @@ public class SystemController implements Initializable
 	private Pane filmPanel5 = new Pane();
 
 	@FXML
-	private Label film5 = new Label();
+	private Label filmTitle5 = new Label();
 
 	@FXML
 	private ImageView image5 = new ImageView();
@@ -191,10 +211,13 @@ public class SystemController implements Initializable
 	private Pane filmPanel6 = new Pane();
 
 	@FXML
-	private Label film6 = new Label();
+	private Label filmTitle6 = new Label();
 
 	@FXML
 	private ImageView image6 = new ImageView();
+	
+	@FXML
+	private ImageView recommendedImage = new ImageView();
 
 	private int loggedInIndex;
 
@@ -296,6 +319,7 @@ public class SystemController implements Initializable
 	@FXML
 	private void selectFilm(MouseEvent event)
 	{
+		searchPane.setVisible(true);
 		successfulRating.setText("");
 		Film film = null;
 		String filmTitle = searchResults.getSelectionModel().getSelectedItem();
@@ -425,21 +449,27 @@ public class SystemController implements Initializable
 		}
 	}
 
-	@FXML
-	private void rateFilm(MouseEvent event)
+	private Film findFilm(String filmName)
 	{
 		Film film = null;
-		if(!filmTitleLabel.equals(null))
+		if(!filmName.equals(null))
 		{
 			for(int i = 0;i<r.getFilms().size();i++)
 			{
-				if(r.getFilms().get(i).getTitle().equals(filmTitleLabel.getText()))
+				if(r.getFilms().get(i).getTitle().equals(filmName))
 				{
 					film = r.getFilms().get(i);
 					break;
 				}
 			}
 		}
+		return film;
+	}
+	
+	@FXML
+	private void rateFilm(MouseEvent event)
+	{
+		Film film = findFilm(filmTitleLabel.getText());
 		if(film!=null)
 		{
 			if(rateFilm.getValue()!=null)
@@ -459,7 +489,7 @@ public class SystemController implements Initializable
 			}
 		}
 	}
-
+	
 	@FXML
 	private void sortAllFilms()
 	{
@@ -511,23 +541,56 @@ public class SystemController implements Initializable
 
 	@FXML
 	private void getRecommendations()
-	{
-		if(!r.getBetterRecommendedFilms().isEmpty())
+	{	
+		recommendedFilms.clear();
+		for(int i = 0; i<r.getBetterRecommendedFilms().size();i++)
 		{
-			filmPanel1.setVisible(true);
-			filmPanel2.setVisible(true);
-			filmPanel3.setVisible(true);
-			filmPanel4.setVisible(true);
-			filmPanel5.setVisible(true);
-			filmPanel6.setVisible(true);
-
-			film1.setText(r.getBetterRecommendedFilms().get(0).getTitle());
-			film2.setText(r.getBetterRecommendedFilms().get(1).getTitle());
-			film3.setText(r.getBetterRecommendedFilms().get(2).getTitle());
-			film4.setText(r.getBetterRecommendedFilms().get(3).getTitle());
-			film5.setText(r.getBetterRecommendedFilms().get(4).getTitle());
-			film6.setText(r.getBetterRecommendedFilms().get(5).getTitle());
-
+			recommendedFilms.add(r.getBetterRecommendedFilms().get(i).getTitle());
+		}
+		recommendations.setItems(recommendedFilms);
+	}
+	
+	@FXML
+	private void selectRecommendedFilm(MouseEvent event)
+	{
+		recommendedPane.setVisible(true);
+		String filmTitle = recommendations.getSelectionModel().getSelectedItem();
+		Film film = findFilm(filmTitle);
+		recommendedTitle.setText(filmTitle);;
+		
+		Image image = new Image("file:"+film.getFilmImage());
+		if(image.getHeight()==0)
+		{
+			image = new Image("file:src/images/no_image_available.jpg");
+			recommendedImage.setImage(image);
+		}
+		else
+		{
+			recommendedImage.setImage(image);
+		}
+	}
+	
+	@FXML
+	private void rateRecommendedFilm(MouseEvent event)
+	{
+		Film film = findFilm(recommendedTitle.getText());
+		if(film!=null)
+		{
+			if(recommendedRating.getValue()!=null)
+			{
+				try {
+					r.newRating(r.getLoggedIn(), film, Integer.valueOf(recommendedRating.getValue()));
+					successfulRecRating.setText("Rating Successful!");
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				successfulRecRating.setText("Please choose a value!");
+			}
 		}
 	}
 
@@ -537,32 +600,17 @@ public class SystemController implements Initializable
 		genrePreference.setValue(list.get(0));
 		genreChange.setItems(list);
 		rateFilm.setItems(ratingsList);
+		recommendedRating.setItems(ratingsList);
 		selectionModel = tabPane.getSelectionModel();
 		r.loadFilms();
 		r.loadMembers();
-		r.setLoggedIn(r.getMembers().get(loggedInIndex));;
-		filmPanel1.setVisible(false);
-		filmPanel2.setVisible(false);
-		filmPanel3.setVisible(false);
-		filmPanel4.setVisible(false);
-		filmPanel5.setVisible(false);
-		filmPanel6.setVisible(false);
+		r.setLoggedIn(r.getMembers().get(loggedInIndex));
 		userId.setText("Welcome, " + r.getLoggedIn().getFirstName() + ".");
+		searchPane.setVisible(false);
+		recommendedPane.setVisible(false);
 		r.getSimilarMembers();
 		r.getFilmRecommendations();
-		StdOut.println("Recommendations:");
-		StdOut.println("---------------------");
-		for(int i = 0; i<r.getRecommendedFilms().size(); i++)
-		{
-			StdOut.println(r.getRecommendedFilms().get(i).getTitle());
-		}
 		r.getBetterRecommendations();
-		StdOut.println("Better Recommendations:");
-		StdOut.println("---------------------");
-		for(int i = 0; i<r.getBetterRecommendedFilms().size(); i++)
-		{
-			StdOut.println(r.getBetterRecommendedFilms().get(i).getTitle());
-		}
 		r.sortByTitle();
 		r.sortByYear();
 	}

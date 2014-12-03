@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import edu.princeton.cs.introcs.StdOut;
 
 import javax.imageio.ImageIO;
 
@@ -35,8 +34,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import view.LogInController;
 
 
 public class RatingSystem
@@ -58,36 +55,6 @@ public class RatingSystem
 	private static final Comparator<Film> BY_YEAR  = new ByYear();
 	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
 	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
-
-
-
-	public static void main(String[] args)
-	{
-		RatingSystem r = new RatingSystem();
-		r.loadFilms();
-		r.loadMembers();
-		r.setLoggedIn(r.getMembers().get(0));
-		r.getSimilarMembers();
-		StdOut.println(r.getListOfSimilarMembers().size());
-
-		r.getFilmRecommendations();
-//		for(int i = 0; i<r.getMembers().size(); i++)
-//		{
-//			StdOut.println(r.getMembers().get(i).getRatings().size());
-//		}
-//		for(int i = 0; i<r.getRecommendedFilms().size(); i++)
-//		{
-//			StdOut.println(r.getRecommendedFilms().get(i).getTitle());
-//		}
-		r.getBetterRecommendations();
-//		for(int i = 0; i<r.getBetterRecommendedFilms().size(); i++)
-//		{
-//			StdOut.println(r.getBetterRecommendedFilms().get(i).getTitle());
-//		}
-		r.sortByTitle();
-		r.sortByYear();
-	}
-	
 
 	public void loadMembers()
 	{
