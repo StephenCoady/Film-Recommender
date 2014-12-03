@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
@@ -75,10 +76,10 @@ public class SystemController implements Initializable
 	private TextField usernameChange = new TextField();
 
 	@FXML
-	private TextField titleSearchTerm = new TextField();
+	private ComboBox<String> titleSearchTerm = new ComboBox<String>();
 
 	@FXML
-	private TextField genreSearchTerm = new TextField();
+	private ComboBox<String> genreSearchTerm = new ComboBox<String>();
 
 	@FXML
 	private ListView<String> searchResults = new ListView<String>();
@@ -289,12 +290,12 @@ public class SystemController implements Initializable
 	private void searchByTitle(MouseEvent event)
 	{
 		ObservableList<String> foundFilms = FXCollections.observableArrayList();
-
-		if(!titleSearchTerm.getText().toLowerCase().isEmpty())
+		tab5.setDisable(false);
+		if(!titleSearchTerm.getValue().isEmpty())
 		{
 			for(int i = 0;i<r.getFilms().size();i++)
 			{
-				if(r.getFilms().get(i).getTitle().toLowerCase().contains(titleSearchTerm.getText().toLowerCase()))
+				if(r.getFilms().get(i).getTitle().toLowerCase().contains(titleSearchTerm.getValue().toLowerCase()))
 				{
 					foundFilms.add(r.getFilms().get(i).getTitle());
 				}
@@ -343,7 +344,7 @@ public class SystemController implements Initializable
 			filmImage.setImage(image);
 		}
 	}
-
+	
 	@FXML
 	private void showSelectedFilm(MouseEvent event)
 	{
@@ -359,6 +360,7 @@ public class SystemController implements Initializable
 		selectedFilmMessage.setText("");
 		if(event.getClickCount()>1)
 		{
+			tab6.setDisable(false);
 			selectionModel.select(5);
 			filmChoiceRating.setItems(ratingsList);
 			Film film = null;
@@ -423,11 +425,12 @@ public class SystemController implements Initializable
 	private void searchByGenre(MouseEvent event)
 	{
 		ObservableList<String> foundFilms = FXCollections.observableArrayList();
-		if(!genreSearchTerm.getText().toLowerCase().isEmpty())
+		tab5.setDisable(false);
+		if(!genreSearchTerm.getValue().toLowerCase().isEmpty())
 		{
 			for(int i = 0;i<r.getFilms().size();i++)
 			{
-				if(r.getFilms().get(i).getGenre().toLowerCase().contains(genreSearchTerm.getText().toLowerCase()))
+				if(r.getFilms().get(i).getGenre().toLowerCase().contains(genreSearchTerm.getValue().toLowerCase()))
 				{
 					foundFilms.add(r.getFilms().get(i).getTitle());
 				}
@@ -602,6 +605,8 @@ public class SystemController implements Initializable
 		rateFilm.setItems(ratingsList);
 		recommendedRating.setItems(ratingsList);
 		selectionModel = tabPane.getSelectionModel();
+		tab6.setDisable(true);
+		tab5.setDisable(true);
 		r.loadFilms();
 		r.loadMembers();
 		r.setLoggedIn(r.getMembers().get(loggedInIndex));
@@ -613,5 +618,9 @@ public class SystemController implements Initializable
 		r.getBetterRecommendations();
 		r.sortByTitle();
 		r.sortByYear();
+		titleSearchTerm.setItems(filmsByTitleList);
+		genreSearchTerm.setItems(list);
+		new AutoCompleteComboBoxListener<>(titleSearchTerm);
+		new AutoCompleteComboBoxListener<>(genreSearchTerm);
 	}
 }

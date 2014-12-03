@@ -120,20 +120,20 @@
                                        </font>
                                     </Label>
                                     <Separator layoutX="19.0" layoutY="65.0" prefHeight="15.0" prefWidth="262.0" />
-                                    <TextField fx:id="titleSearchTerm" layoutX="19.0" layoutY="108.0" promptText="Search By Title" />
                                     <Button layoutX="19.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#searchByTitle" text="Search" />
                                     <Label layoutX="21.0" layoutY="242.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="or">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="genreSearchTerm" layoutX="19.0" layoutY="310.0" promptText="Search By Genre" />
                                     <Button layoutX="21.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#searchByGenre" text="Search" />
                                     <Label fx:id="noSearchTerm" layoutX="21.0" layoutY="429.0" prefHeight="192.0" prefWidth="199.0" textFill="#ee0606" wrapText="true">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
+                                    <ComboBox fx:id="titleSearchTerm" editable="true" layoutX="20.0" layoutY="125.0" prefWidth="150.0" promptText="Search By Title" />
+                                    <ComboBox fx:id="genreSearchTerm" editable="true" layoutX="20.0" layoutY="332.0" prefWidth="150.0" promptText="Search By Genre" />
                                  </children>
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -263,7 +263,15 @@
             </Tab>
             <Tab fx:id="tab7" text="My Films">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3824975417895772" layoutX="208.0" layoutY="107.0" prefHeight="704.0" prefWidth="1019.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>
