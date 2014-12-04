@@ -49,6 +49,7 @@ public class SystemController implements Initializable
 	@FXML
 	private Tab tab7 = new Tab();
 
+	
 	@FXML
 	private static RatingSystem r = new RatingSystem();
 
@@ -94,35 +95,35 @@ public class SystemController implements Initializable
 
 	@FXML
 	private ListView<String> filmsByYear = new ListView<String>();
-	
+
 	@FXML
 	private ListView<String> ratedFilms = new ListView<String>();
-	
+
 	@FXML
 	private ListView<String> recommendations = new ListView<String>();
 
 	@FXML
 	private TextField yearChange = new TextField();
 
-	final ObservableList<String> list = FXCollections.observableArrayList(
+	private final ObservableList<String> list = FXCollections.observableArrayList(
 			"Drama","Action","Comedy","Family","Horror","Crime","Biography","Adventure"
 			);
 
-	final ObservableList<String> ratingsList = FXCollections.observableArrayList(
+	private final ObservableList<String> ratingsList = FXCollections.observableArrayList(
 			"5","3","1","0","-3","-5"
 			);
 
 	private ObservableList<String> ratedFilmsByTitle = FXCollections.observableArrayList();
-	
+
 	private ObservableList<String> filmsByTitleList = FXCollections.observableArrayList();
 
 	private ObservableList<String> filmsByYearList = FXCollections.observableArrayList();
-	
+
 	private ObservableList<String> recommendedFilms = FXCollections.observableArrayList();
 
 	@FXML
 	private ChoiceBox<String> rateFilm = new ChoiceBox<String>();
-	
+
 	@FXML
 	private ChoiceBox<String> reRatingBox = new ChoiceBox<String>();
 
@@ -131,7 +132,7 @@ public class SystemController implements Initializable
 
 	@FXML
 	private ChoiceBox<String> recommendedRating = new ChoiceBox<String>();
-	
+
 	@FXML
 	private Label incorrectUser = new Label();
 
@@ -143,13 +144,16 @@ public class SystemController implements Initializable
 
 	@FXML
 	private Label noResults = new Label();
-	
+
 	@FXML
 	private Label recommendedTitle = new Label();
-	
+
+	@FXML
+	private Label numericalRating = new Label();
+
 	@FXML
 	private Pane searchPane = new Pane();
-	
+
 	@FXML
 	private Pane recommendedPane = new Pane();
 
@@ -167,7 +171,7 @@ public class SystemController implements Initializable
 
 	@FXML
 	private Label userId = new Label();
-	
+
 	@FXML
 	private Label successfulRecRating = new Label();
 
@@ -229,31 +233,31 @@ public class SystemController implements Initializable
 
 	@FXML
 	private ImageView image6 = new ImageView();
-	
+
 	@FXML
 	private ImageView recommendedImage = new ImageView();
 
 	@FXML 
 	private Pane ratingPane = new Pane();
-	
+
 	@FXML
 	private Label successfulReRating = new Label();
-	
+
 	@FXML
 	private Label ratingLabel = new Label();
-	
+
 	@FXML
 	private ImageView ratingImage = new ImageView();
-	
+
 	@FXML
 	private ImageView mainImage = new ImageView();
-	
+
 	@FXML
 	private ImageView bannerImage = new ImageView();
-	
+
 	@FXML
 	private Button logOutButton = new Button();
-	
+
 	private int loggedInIndex;
 
 	public SystemController(int loggedInIndex) 
@@ -378,7 +382,7 @@ public class SystemController implements Initializable
 			filmImage.setImage(image);
 		}
 	}
-	
+
 	@FXML
 	private void showSelectedFilm(MouseEvent event)
 	{
@@ -491,7 +495,7 @@ public class SystemController implements Initializable
 		}
 		return film;
 	}
-	
+
 	@FXML
 	private void rateFilm(MouseEvent event)
 	{
@@ -515,7 +519,7 @@ public class SystemController implements Initializable
 			}
 		}
 	}
-	
+
 	@FXML
 	private void sortAllFilms()
 	{
@@ -568,6 +572,7 @@ public class SystemController implements Initializable
 	@FXML
 	private void getRecommendations()
 	{	
+		recommendations.setItems(null);
 		recommendedFilms.clear();
 		for(int i = 0; i<r.getBetterRecommendedFilms().size();i++)
 		{
@@ -575,7 +580,7 @@ public class SystemController implements Initializable
 		}
 		recommendations.setItems(recommendedFilms);
 	}
-	
+
 	@FXML
 	private void selectRecommendedFilm(MouseEvent event)
 	{
@@ -583,7 +588,7 @@ public class SystemController implements Initializable
 		String filmTitle = recommendations.getSelectionModel().getSelectedItem();
 		Film film = findFilm(filmTitle);
 		recommendedTitle.setText(filmTitle);;
-		
+
 		Image image = new Image("file:"+film.getFilmImage());
 		if(image.getHeight()==0)
 		{
@@ -595,7 +600,23 @@ public class SystemController implements Initializable
 			recommendedImage.setImage(image);
 		}
 	}
-	
+
+	@FXML
+	private void updateRatings()
+	{
+
+		ratedFilms.setItems(null);
+		ratedFilmsByTitle.clear();
+		for(int i = 0; i<r.getFilms().size();i++)
+		{
+			if(r.getLoggedIn().getRatings().get(i)!=null)
+			{
+				ratedFilmsByTitle.add(r.getLoggedIn().getRatings().get(i).getFilm().getTitle());
+			}
+		}
+		ratedFilms.setItems(ratedFilmsByTitle);
+	}
+
 	@FXML
 	private void rateRecommendedFilm(MouseEvent event)
 	{
@@ -607,6 +628,9 @@ public class SystemController implements Initializable
 				try {
 					r.newRating(r.getLoggedIn(), film, Integer.valueOf(recommendedRating.getValue()));
 					successfulRecRating.setText("Rating Successful!");
+					ratedFilmsByTitle.add(film.getTitle());
+					recommendedFilms.remove(film);
+					getRecommendations();
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -627,7 +651,8 @@ public class SystemController implements Initializable
 		successfulReRating.setText("");
 		String filmTitle = ratedFilms.getSelectionModel().getSelectedItem();
 		ratingLabel.setText(filmTitle);
-		Film film = findFilm(filmTitle);;
+		Film film = findFilm(filmTitle);
+		int filmInt = r.getFilms().indexOf(film);
 		Image image = new Image("file:"+film.getFilmImage());
 		if(image.getHeight()==0)
 		{
@@ -638,8 +663,13 @@ public class SystemController implements Initializable
 		{
 			ratingImage.setImage(image);
 		}
+		try{
+			numericalRating.setText(Integer.toString(r.getLoggedIn().getRatings().get(filmInt).getRating()));
+		}
+		catch(Exception e){
+		}
 	}
-	
+
 	@FXML
 	private void editRating(MouseEvent event)
 	{
@@ -663,31 +693,31 @@ public class SystemController implements Initializable
 			}
 		}
 	}
-	
+
 	@FXML
 	private void swapTab2(MouseEvent event)
 	{
 		selectionModel.select(1);
 	}
-	
+
 	@FXML
 	private void swapTab3(MouseEvent event)
 	{
 		selectionModel.select(2);
 	}
-	
+
 	@FXML
 	private void swapTab4(MouseEvent event)
 	{
 		selectionModel.select(3);
 	}
-	
+
 	@FXML
 	private void swapTab7(MouseEvent event)
 	{
 		selectionModel.select(6);
 	}
-	
+
 	private void tearDown()
 	{
 		r.getMembers().clear();
@@ -695,38 +725,63 @@ public class SystemController implements Initializable
 		r.getBetterRecommendedFilms().clear();
 		r.getListOfSimilarMembers().clear();
 		r.getRatings().clear();
+		r.getLoggedIn().getRatings().clear();
 		r.getSortedByTitle().clear();
 		r.getSortedByYear().clear();
 		r.getRecommendedFilms().clear();
 	}
-	
+
 	@FXML
 	private void logOut(MouseEvent event) throws IOException
 	{
 		r.saveFilms();
 		r.saveMembers();
 		tearDown();
-		
-		((Node)(event.getSource())).getScene().getWindow().hide();
-		
-		
-		FXMLLoader loader = new FXMLLoader(
-			    getClass().getResource(
-			        "Login.fxml"
-			    )
-			);
 
-		
+		((Node)(event.getSource())).getScene().getWindow().hide();
+
+
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(
+						"Login.fxml"
+						)
+				);
+
+
 		Stage mainStage = new Stage();
 		mainStage.setTitle("Log In or Sign Up");
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
 		mainStage.setScene(scene);
 		mainStage.show();
-		
-		
 	}
-	
+
+	@FXML
+	private void deleteAccount(MouseEvent event) throws IOException
+	{
+		int noOfMembers = r.getMembers().size();
+		DeleteAccountController d = new DeleteAccountController(r.getMembers().indexOf(r.getLoggedIn()));
+		
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(
+						"DeleteAccount.fxml"
+						)
+				);
+		loader.setController(d);
+		Stage mainStage = new Stage();
+		mainStage.setTitle("Delete Account");
+		Parent root = (Parent) loader.load();
+		Scene scene = new Scene(root);
+		mainStage.setScene(scene);
+		mainStage.show();
+		r.loadMembers();
+		int newNoOfMembers = r.getMembers().size();
+		if(newNoOfMembers<noOfMembers)
+		{
+			logOut(event);
+		}
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		genrePreference.setItems(list);
@@ -752,7 +807,7 @@ public class SystemController implements Initializable
 		genreSearchTerm.setItems(list);
 		new AutoCompleteComboBoxListener<>(titleSearchTerm);
 		new AutoCompleteComboBoxListener<>(genreSearchTerm);
-		
+
 		ratingPane.setVisible(false);
 		for(int i = 0; i<r.getFilms().size();i++)
 		{
@@ -763,10 +818,10 @@ public class SystemController implements Initializable
 		}
 		ratedFilms.setItems(ratedFilmsByTitle);
 		reRatingBox.setItems(ratingsList);
-		
+
 		Image image = new Image("file:src/images/movies.gif");
 		mainImage.setImage(image);
-		
+
 		Image image2 = new Image("file:src/images/movie-banner.jpg");
 		bannerImage.setImage(image2);
 	}

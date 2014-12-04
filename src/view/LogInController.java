@@ -53,7 +53,7 @@ public class LogInController implements Initializable
 	@FXML
 	private TextField yearPreference = new TextField();
 
-	final ObservableList<String> list = FXCollections.observableArrayList(
+	private final ObservableList<String> list = FXCollections.observableArrayList(
 			"Drama","Action","Comedy","Family","Horror","Crime","Biography","Adventure"
 			);
 
@@ -111,9 +111,9 @@ public class LogInController implements Initializable
 		{
 			Member member = r.newMember(firstName.getText(), secondName.getText(), desiredUserName.getText(), desiredPassword.getText(), genrePreference.getValue(), Integer.valueOf(yearPreference.getText()));
 			loggedInIndex = r.getMembers().indexOf(member);
+			r.saveMembers();
 			((Node)(event.getSource())).getScene().getWindow().hide();
 			startUp();
-			r.saveMembers();
 		}
 		else if (firstName.getText().equals(null) 
 				|| secondName.getText().equals(null) 
