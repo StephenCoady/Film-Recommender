@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-
 import javax.imageio.ImageIO;
 
 import java.io.FileNotFoundException;
@@ -56,6 +55,7 @@ public class RatingSystem
 	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
 	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
 
+	@SuppressWarnings("unchecked")
 	public void loadMembers()
 	{
 		JSONParser parser = new JSONParser();
@@ -86,8 +86,11 @@ public class RatingSystem
 				}
 				Member newMember = new Member(obj3, obj4, obj2, obj5, obj6, pref);
 				members.add(newMember);
+				
 				//deals with the member's ratings
 				Object keyArray = newArray.get(6);
+				HashMap<Integer, Rating> map = (HashMap<Integer, Rating>) newArray.get(6);
+				newMember.setRatings(map);
 				JSONObject jsonObject2 = (JSONObject) keyArray;
 				for(int j = 0; j<films.size();j++)
 				{

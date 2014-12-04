@@ -16,17 +16,12 @@ public class DeleteAccountController implements Initializable
 {	
 	@FXML
 	private ImageView sadFace = new ImageView();
-	
-	private int memberId;
-	
-	public DeleteAccountController(int memberId)
-	{
-		this.memberId = memberId;
-	}
+	private RatingSystem r = new RatingSystem();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		r.loadMembers();
 		Image image = new Image("file:src/images/sadFace.gif");
 		sadFace.setImage(image);
 	}
@@ -40,9 +35,6 @@ public class DeleteAccountController implements Initializable
 	@FXML
 	private void deleteAccountYes(MouseEvent event) throws IOException
 	{
-		RatingSystem r = new RatingSystem();
-		r.getMembers().remove(memberId);
-		r.saveMembers();
-		((Node)(event.getSource())).getScene().getWindow().hide();
+		System.exit(0);
 	}
 }

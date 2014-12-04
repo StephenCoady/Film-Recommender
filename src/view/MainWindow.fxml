@@ -335,49 +335,7 @@
             </Tab>
             <Tab fx:id="tab8" text="Film Management">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <SplitPane dividerPositions="0.3824975417895772" layoutX="208.0" layoutY="74.0" prefHeight="630.0" prefWidth="1019.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="74.0">
-                           <items>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="654.0" prefWidth="361.0">
-                                 <children>
-                                    <ScrollPane layoutX="7.0" prefHeight="631.0" prefWidth="385.0" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <content>
-                                          <ListView fx:id="ratedFilms1" onMouseClicked="#selectRating" prefHeight="569.0" prefWidth="382.0" />
-                                       </content>
-                                    </ScrollPane>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="664.0" prefWidth="624.0">
-                                 <children>
-                                    <Pane fx:id="ratingPane1" layoutX="39.0" layoutY="30.0" prefHeight="465.0" prefWidth="558.0">
-                                       <children>
-                                          <Label fx:id="successfulReRating1" layoutX="321.0" layoutY="304.0" prefHeight="54.0" prefWidth="160.0" textFill="#ee0707" wrapText="true" />
-                                          <Label fx:id="ratingLabel1" layoutX="326.0" layoutY="53.0" prefHeight="56.0" prefWidth="186.0" />
-                                          <ImageView fx:id="ratingImage1" fitHeight="237.0" fitWidth="255.0" layoutX="24.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" />
-                                          <ChoiceBox fx:id="reRatingBox1" layoutX="326.0" layoutY="171.0" prefWidth="150.0" />
-                                          <Button layoutX="326.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#editRating" text="Rate" />
-                                          <Label fx:id="currentRating1" layoutX="24.0" layoutY="20.0" text="Edit Your Rating:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="326.0" layoutY="137.0" text="Current:" />
-                                          <Label fx:id="numericalRating1" layoutX="393.0" layoutY="137.0" prefHeight="16.0" prefWidth="55.0" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </AnchorPane>
-                           </items>
-                        </SplitPane>
-                        <Label layoutX="14.0" prefHeight="50.0" prefWidth="243.0" text="Your Ratings">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="50.0" text="Here are the films you have rated:" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
             </Tab>
         </tabs>

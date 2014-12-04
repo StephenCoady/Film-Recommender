@@ -30,6 +30,11 @@ public class Member
 	{
 		return ratings;
 	}
+	
+	public void setRatings(HashMap<Integer, Rating> ratings)
+	{
+		this.ratings = ratings;
+	}
 
 	public String getFirstName() 
 	{

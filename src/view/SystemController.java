@@ -32,79 +32,32 @@ import controller.RatingSystem;
 
 public class SystemController implements Initializable
 {	
-	@FXML
-	private TabPane tabPane = new TabPane();
-	@FXML
-	private Tab tab1 = new Tab();
-	@FXML
-	private Tab tab2 = new Tab();
-	@FXML
-	private Tab tab3 = new Tab();
-	@FXML
-	private Tab tab4 = new Tab();
-	@FXML
-	private Tab tab5 = new Tab();
-	@FXML
-	private Tab tab6 = new Tab();
-	@FXML
-	private Tab tab7 = new Tab();
-
-	
-	@FXML
-	private static RatingSystem r = new RatingSystem();
-
-
-	@FXML
-	private ChoiceBox<String> genrePreference = new ChoiceBox<String>();
-
-	@FXML
-	private ChoiceBox<String> genreChange = new ChoiceBox<String>();
-
-	@FXML
-	private PasswordField passwordChange = new PasswordField();
-
-	@FXML
-	private PasswordField confirmPasswordChange = new PasswordField();
-
-	@FXML
-	private TextField firstNameChange = new TextField();
-
-	@FXML
-	private ImageView filmImage = new ImageView();
-
-	@FXML
-	private ImageView filmChoiceImage = new ImageView();
-
-	@FXML
-	private TextField secondNameChange = new TextField();
-
-	@FXML
-	private TextField usernameChange = new TextField();
-
-	@FXML
-	private ComboBox<String> titleSearchTerm = new ComboBox<String>();
-
-	@FXML
-	private ComboBox<String> genreSearchTerm = new ComboBox<String>();
-
-	@FXML
-	private ListView<String> searchResults = new ListView<String>();
-
-	@FXML
-	private ListView<String> filmsByTitle = new ListView<String>();
-
-	@FXML
-	private ListView<String> filmsByYear = new ListView<String>();
-
-	@FXML
-	private ListView<String> ratedFilms = new ListView<String>();
-
-	@FXML
-	private ListView<String> recommendations = new ListView<String>();
-
-	@FXML
-	private TextField yearChange = new TextField();
-
+	@FXML private TabPane tabPane = new TabPane();
+	@FXML private Tab tab1 = new Tab();
+	@FXML private Tab tab2 = new Tab();
+	@FXML private Tab tab3 = new Tab();
+	@FXML private Tab tab4 = new Tab();
+	@FXML private Tab tab5 = new Tab();
+	@FXML private Tab tab6 = new Tab();
+	@FXML private Tab tab7 = new Tab();
+	@FXML private static RatingSystem r = new RatingSystem();
+	@FXML private ChoiceBox<String> genrePreference = new ChoiceBox<String>();
+	@FXML private ChoiceBox<String> genreChange = new ChoiceBox<String>();
+	@FXML private PasswordField passwordChange = new PasswordField();
+	@FXML private PasswordField confirmPasswordChange = new PasswordField();
+	@FXML private TextField firstNameChange = new TextField();
+	@FXML private ImageView filmImage = new ImageView();
+	@FXML private ImageView filmChoiceImage = new ImageView();
+	@FXML private TextField secondNameChange = new TextField();
+	@FXML private TextField usernameChange = new TextField();
+	@FXML private ComboBox<String> titleSearchTerm = new ComboBox<String>();
+	@FXML private ComboBox<String> genreSearchTerm = new ComboBox<String>();
+	@FXML private ListView<String> searchResults = new ListView<String>();
+	@FXML private ListView<String> filmsByTitle = new ListView<String>();
+	@FXML private ListView<String> filmsByYear = new ListView<String>();
+	@FXML private ListView<String> ratedFilms = new ListView<String>();
+	@FXML private ListView<String> recommendations = new ListView<String>();
+	@FXML private TextField yearChange = new TextField();
 	private final ObservableList<String> list = FXCollections.observableArrayList(
 			"Drama","Action","Comedy","Family","Horror","Crime","Biography","Adventure"
 			);
@@ -112,151 +65,56 @@ public class SystemController implements Initializable
 	private final ObservableList<String> ratingsList = FXCollections.observableArrayList(
 			"5","3","1","0","-3","-5"
 			);
-
 	private ObservableList<String> ratedFilmsByTitle = FXCollections.observableArrayList();
-
 	private ObservableList<String> filmsByTitleList = FXCollections.observableArrayList();
-
 	private ObservableList<String> filmsByYearList = FXCollections.observableArrayList();
-
 	private ObservableList<String> recommendedFilms = FXCollections.observableArrayList();
-
-	@FXML
-	private ChoiceBox<String> rateFilm = new ChoiceBox<String>();
-
-	@FXML
-	private ChoiceBox<String> reRatingBox = new ChoiceBox<String>();
-
-	@FXML
-	private ChoiceBox<String> filmChoiceRating = new ChoiceBox<String>();
-
-	@FXML
-	private ChoiceBox<String> recommendedRating = new ChoiceBox<String>();
-
-	@FXML
-	private Label incorrectUser = new Label();
-
-	@FXML
-	private Label noSignUp = new Label();
-
-	@FXML
-	private Label noSearchTerm = new Label();
-
-	@FXML
-	private Label noResults = new Label();
-
-	@FXML
-	private Label recommendedTitle = new Label();
-
-	@FXML
-	private Label numericalRating = new Label();
-
-	@FXML
-	private Pane searchPane = new Pane();
-
-	@FXML
-	private Pane recommendedPane = new Pane();
-
-	@FXML
-	private Label successfulRating = new Label();
-
-	@FXML
-	private Label incorrectDetails = new Label();
-
-	@FXML
-	private Label filmTitleLabel = new Label();
-
-	@FXML
-	private Label filmChoiceTitle = new Label();
-
-	@FXML
-	private Label userId = new Label();
-
-	@FXML
-	private Label successfulRecRating = new Label();
-
-	@FXML
-	private Label selectedFilmMessage = new Label();
-
+	@FXML private ChoiceBox<String> rateFilm = new ChoiceBox<String>();
+	@FXML private ChoiceBox<String> reRatingBox = new ChoiceBox<String>();
+	@FXML private ChoiceBox<String> filmChoiceRating = new ChoiceBox<String>();
+	@FXML private ChoiceBox<String> recommendedRating = new ChoiceBox<String>();
+	@FXML private Label incorrectUser = new Label();
+	@FXML private Label noSignUp = new Label();
+	@FXML private Label noSearchTerm = new Label();
+	@FXML private Label noResults = new Label();
+	@FXML private Label recommendedTitle = new Label();
+	@FXML private Label numericalRating = new Label();
+    @FXML private Pane searchPane = new Pane();
+	@FXML private Pane recommendedPane = new Pane();
+	@FXML private Label successfulRating = new Label();
+	@FXML private Label incorrectDetails = new Label();
+	@FXML private Label filmTitleLabel = new Label();
+	@FXML private Label filmChoiceTitle = new Label();
+	@FXML private Label userId = new Label();
+	@FXML private Label successfulRecRating = new Label();
+	@FXML private Label selectedFilmMessage = new Label();
 	private SingleSelectionModel<Tab> selectionModel;
-
-	@FXML
-	private Pane filmPanel1 = new Pane();
-
-	@FXML
-	private Label filmTitle1 = new Label();
-
-	@FXML
-	private ImageView image1 = new ImageView();	
-
-	@FXML
-	private Pane filmPanel2 = new Pane();
-
-	@FXML
-	private Label filmTitle2 = new Label();
-
-	@FXML
-	private ImageView image2 = new ImageView();
-
-	@FXML
-	private Pane filmPanel3 = new Pane();
-
-	@FXML
-	private Label filmTitle3 = new Label();
-
-	@FXML
-	private ImageView image3 = new ImageView();
-
-	@FXML
-	private Pane filmPanel4 = new Pane();
-
-	@FXML
-	private Label filmTitle4 = new Label();
-
-	@FXML
-	private ImageView image4 = new ImageView();
-
-	@FXML
-	private Pane filmPanel5 = new Pane();
-
-	@FXML
-	private Label filmTitle5 = new Label();
-
-	@FXML
-	private ImageView image5 = new ImageView();
-
-	@FXML
-	private Pane filmPanel6 = new Pane();
-
-	@FXML
-	private Label filmTitle6 = new Label();
-
-	@FXML
-	private ImageView image6 = new ImageView();
-
-	@FXML
-	private ImageView recommendedImage = new ImageView();
-
-	@FXML 
-	private Pane ratingPane = new Pane();
-
-	@FXML
-	private Label successfulReRating = new Label();
-
-	@FXML
-	private Label ratingLabel = new Label();
-
-	@FXML
-	private ImageView ratingImage = new ImageView();
-
-	@FXML
-	private ImageView mainImage = new ImageView();
-
-	@FXML
-	private ImageView bannerImage = new ImageView();
-
-	@FXML
-	private Button logOutButton = new Button();
+	@FXML private Pane filmPanel1 = new Pane();
+	@FXML private Label filmTitle1 = new Label();
+	@FXML private ImageView image1 = new ImageView();	
+	@FXML private Pane filmPanel2 = new Pane();
+	@FXML private Label filmTitle2 = new Label();
+	@FXML private ImageView image2 = new ImageView();
+	@FXML private Pane filmPanel3 = new Pane();
+	@FXML private Label filmTitle3 = new Label();
+	@FXML private ImageView image3 = new ImageView();
+	@FXML private Pane filmPanel4 = new Pane();
+	@FXML private Label filmTitle4 = new Label();
+	@FXML private ImageView image4 = new ImageView();
+	@FXML private Pane filmPanel5 = new Pane();
+	@FXML private Label filmTitle5 = new Label();
+	@FXML private ImageView image5 = new ImageView();
+	@FXML private Pane filmPanel6 = new Pane();
+	@FXML private Label filmTitle6 = new Label();
+	@FXML private ImageView image6 = new ImageView();
+	@FXML private ImageView recommendedImage = new ImageView();
+	@FXML private Pane ratingPane = new Pane();
+	@FXML private Label successfulReRating = new Label();
+	@FXML private Label ratingLabel = new Label();
+	@FXML private ImageView ratingImage = new ImageView();
+	@FXML private ImageView mainImage = new ImageView();
+	@FXML private ImageView bannerImage = new ImageView();
+	@FXML private Button logOutButton = new Button();
 
 	private int loggedInIndex;
 
@@ -759,29 +617,20 @@ public class SystemController implements Initializable
 	@FXML
 	private void deleteAccount(MouseEvent event) throws IOException
 	{
-		int noOfMembers = r.getMembers().size();
-		DeleteAccountController d = new DeleteAccountController(r.getMembers().indexOf(r.getLoggedIn()));
 		
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(
 						"DeleteAccount.fxml"
 						)
 				);
-		loader.setController(d);
 		Stage mainStage = new Stage();
 		mainStage.setTitle("Delete Account");
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
 		mainStage.setScene(scene);
 		mainStage.show();
-		r.loadMembers();
-		int newNoOfMembers = r.getMembers().size();
-		if(newNoOfMembers<noOfMembers)
-		{
-			logOut(event);
-		}
 	}
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		genrePreference.setItems(list);
