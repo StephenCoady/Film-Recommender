@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -34,6 +33,12 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * This class which performs all tasks needed by the view controller. 
+ * 
+ * @author Stephen
+ *
+ */
 
 public class RatingSystem
 {
@@ -55,6 +60,13 @@ public class RatingSystem
 	private ArrayList<Film> sortedByTitle = new ArrayList<Film>();
 	private ArrayList<Film> sortedByYear = new ArrayList<Film>();
 
+
+	/**
+	 * 
+	 * a method to load all members from a JSON file. 
+	 * takes in a jsonObject and splits it up to add each individual component.
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public void loadMembers()
 	{
@@ -86,7 +98,7 @@ public class RatingSystem
 				}
 				Member newMember = new Member(obj3, obj4, obj2, obj5, obj6, pref);
 				members.add(newMember);
-				
+
 				//deals with the member's ratings
 				Object keyArray = newArray.get(6);
 				HashMap<Integer, Rating> map = (HashMap<Integer, Rating>) newArray.get(6);
@@ -118,14 +130,16 @@ public class RatingSystem
 			errorLog(e.getMessage());
 			loadMembers();
 		}
-		try {
-			backupMembers();
-		} catch (IOException e) {
-			e.printStackTrace();
-			errorLog(e.getMessage());
-		}
+		backupMembers();
+		
 	}
 
+	/**
+	 * 
+	 * saves all members in members arrayList to a JSON file.
+	 * 
+	 * @throws IOException
+	 */
 	@SuppressWarnings("unchecked")
 	public void saveMembers() throws IOException
 	{
@@ -167,6 +181,12 @@ public class RatingSystem
 		}
 	}
 
+	/**
+	 * 
+	 * loads films from JSON file. breaks the JSON object 
+	 * into individual pieces to load each film
+	 * 
+	 */
 	public void loadFilms()
 	{
 		JSONParser parser = new JSONParser();
@@ -175,30 +195,33 @@ public class RatingSystem
 			JSONObject jsonObject = (JSONObject) obj;
 			for (int i = 0; i < jsonObject.size(); i++)
 			{
-				ArrayList<?> newArray = (ArrayList<?>) jsonObject.get(Integer.toString(i));
-				Object obj2  = newArray.get(0);
-				String ID2 = obj2.toString();
-				int ID = Integer.parseInt(ID2);
-				String title = (String) newArray.get(1);
-
-				Long longYear = (Long) newArray.get(2);
-				String stringYear = Long.toString(longYear);
-				int year = Integer.valueOf(stringYear);
-
-				String genre = (String) newArray.get(3);
-				String imageLocation = (String) newArray.get(4);
-
-				if(imageLocation.equals("src/images/no_image_available.jpg"))
+				if(jsonObject.get(Integer.toString(i)) != null)
 				{
-					imageLocation = getFilmImage(title);
-					imageLocation = saveImage(imageLocation, title);
-				}
+					ArrayList<?> newArray = (ArrayList<?>) jsonObject.get(Integer.toString(i));
+					Object obj2  = newArray.get(0);
+					String ID2 = obj2.toString();
+					int ID = Integer.parseInt(ID2);
+					String title = (String) newArray.get(1);
 
-				Film film = new Film(ID, title, year, genre);
-				film.setFilmImage(imageLocation);
-				films.add(film);
+					Long longYear = (Long) newArray.get(2);
+					String stringYear = Long.toString(longYear);
+					int year = Integer.valueOf(stringYear);
+
+					String genre = (String) newArray.get(3);
+					String imageLocation = (String) newArray.get(4);
+
+					if(imageLocation.equals("src/images/no_image_available.jpg"))
+					{
+						imageLocation = getFilmImage(title);
+						imageLocation = saveImage(imageLocation, title);
+					}
+
+					Film film = new Film(ID, title, year, genre);
+					film.setFilmImage(imageLocation);
+					films.add(film);
+				}
 			}
-		} catch (FileNotFoundException e) {
+		}catch (FileNotFoundException e) {
 			this.loadFilmsLocation = "src/backup/films.json";
 			this.loadBackupFilmsLocation = "src/files/films.json";
 			errorLog(e.getMessage());
@@ -217,6 +240,11 @@ public class RatingSystem
 		backUpFilms();
 	}
 
+	/**
+	 * 
+	 * saves all films in films arrayList to a JSON file.
+	 * @throws IOException
+	 */
 	@SuppressWarnings("unchecked")
 	public void saveFilms() throws IOException
 	{
@@ -245,13 +273,37 @@ public class RatingSystem
 		}
 	}
 
-	public Member newMember(String firstName, String secondName, String accountName, String password, String genrePref, int yearPref) throws IOException
+	/**
+	 * 
+	 * 
+	 * creates a new member with properties
+	 * 
+	 * @param firstName
+	 * @param secondName
+	 * @param accountName
+	 * @param password
+	 * @param genrePref
+	 * @param yearPref
+	 * @return the member created
+	 * 
+	 * 
+	 */
+	public Member newMember(String firstName, String secondName, String accountName, String password, String genrePref, int yearPref)
 	{
 		Member newMember = new Member(firstName, secondName, accountName, password, genrePref, yearPref);
 		members.add(newMember);
 		return newMember;
 	}
 
+	/**
+	 * 
+	 * creates a new film in the system
+	 * 
+	 * @param title
+	 * @param year
+	 * @param genre
+	 * @throws IOException if the film image cannot be downloaded
+	 */
 	public void newFilm(String title, int year, String genre) throws IOException
 	{
 		Film newFilm = new Film(films.size(), title, year, genre);
@@ -273,6 +325,13 @@ public class RatingSystem
 		file.delete();
 	}
 
+	/**
+	 * a method to make a rating when the system loads a new member
+	 * @param userID
+	 * @param film
+	 * @param rating
+	 * @throws IOException
+	 */
 	public void initialNewRating(int userID, Film film, int rating) throws IOException
 	{
 		Member member = members.get(userID);
@@ -283,9 +342,17 @@ public class RatingSystem
 		member.getRatings().put(ID, newRating);
 	}
 
-	public void newRating(Member member, Film film, int rating) throws IOException
+	/**
+	 * a method to allow a member to rate a film.
+	 * if the member has already rated a film then 
+	 * the original rating is overwritten by the new rating
+	 * 
+	 * @param member
+	 * @param film
+	 * @param rating
+	 */
+	public void newRating(Member member, Film film, int rating)
 	{
-		//Member member = members.get(userID);
 		int ID = film.getID();
 		if(!member.getRatings().containsKey(ID))
 		{
@@ -320,6 +387,12 @@ public class RatingSystem
 		}
 	}
 
+	/**
+	 * saves the image for the downloaded string to a file
+	 * @param urlString
+	 * @param filmName
+	 * @return
+	 */
 	public String saveImage(String urlString, String filmName)
 	{
 		Image image = null;
@@ -336,6 +409,14 @@ public class RatingSystem
 		return "src/images/" + filmName + ".gif";
 	}
 
+	/**
+	 * 
+	 * uses the google ajax API to download an image for a film
+	 * 
+	 * @param filmName
+	 * @return
+	 * @throws IOException
+	 */
 	public String getFilmImage(String filmName) throws IOException
 	{
 		String search = filmName.replaceAll("\\s+","+");
@@ -358,6 +439,10 @@ public class RatingSystem
 		return imageString;
 	}
 
+	/**
+	 * 
+	 * compiles a list of members with similar ratings to the logged in member.
+	 */
 	public void getSimilarMembers()
 	{
 		for(int i = 0; i < members.size();i++)
@@ -379,11 +464,19 @@ public class RatingSystem
 			}
 		}
 	}
+
 	public HashMap<Integer, Integer> getListOfSimilarMembers()
 	{
 		return similarMembers;
 	}
 
+	/**
+	 * 
+	 * gets a list of films to recommend to a 
+	 * user based on the list of similar members. 
+	 * adds the films of the four most similar members.
+	 * 
+	 */
 	public void getFilmRecommendations()
 	{
 		int largestNum = 0;
@@ -437,6 +530,12 @@ public class RatingSystem
 		}
 	}
 
+	/**
+	 * 
+	 * takes the recommended films and narrows down the list. this is done by using the user's
+	 * preferences for genre and decade
+	 * 
+	 */
 	public void getBetterRecommendations()
 	{
 		String userGenrePreference = loggedIn.getGenrePreference();
@@ -457,7 +556,12 @@ public class RatingSystem
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 * sorts the films using a comparator and the films titles.
+	 * 
+	 */
 	public void sortByTitle()
 	{
 		Collections.sort(films, BY_TITLE);
@@ -487,7 +591,11 @@ public class RatingSystem
 			return a.getTitle().compareTo(b.getTitle());
 		}
 	}
-
+	/**
+	 * 
+	 * sorts the films using a comparator and the films year.
+	 * 
+	 */
 	public void sortByYear()
 	{
 		Collections.sort(films, BY_YEAR);
@@ -502,36 +610,6 @@ public class RatingSystem
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private void randomiseRatings()
-	{
-		Random rand = new Random();
-		ratings.clear();
-		int[] array;
-		array = new int[5];
-		array[0] = -5;
-		array[1] = -3;
-		array[2] = 1;
-		array[3] = 3;
-		array[4] = 5;
-		for(Member member: members)
-		{
-			member.getRatings().clear();
-			for(int i = 0; i < 45; i++)
-			{
-				int randomKey = rand.nextInt(films.size());
-				int random = rand.nextInt(5);
-				int randomRating = array[random];
-				Rating rating = new Rating(randomRating, films.get(randomKey), member);
-				member.getRatings().put(randomKey, rating);
-				Film film = films.get(randomKey);
-				film.addRating(randomRating);
-				ratings.put(film.getID(), film.getSumOfRatings());
-			}
-		}
-
-	}
-
 	private void backUpFilms()
 	{
 		File source = new File(loadFilmsLocation);
@@ -543,26 +621,20 @@ public class RatingSystem
 		}
 	}
 
-	public String getLoadBackupMembersLocation() {
-		return loadBackupMembersLocation;
-	}
-
-
 	public void setLoadBackupMembersLocation(String loadBackupMembersLocation) {
 		this.loadBackupMembersLocation = loadBackupMembersLocation;
 	}
-
-
-	public String getLoadBackupFilmsLocation() {
-		return loadBackupFilmsLocation;
-	}
-
 
 	public void setLoadBackupFilmsLocation(String loadBackupFilmsLocation) {
 		this.loadBackupFilmsLocation = loadBackupFilmsLocation;
 	}
 
 
+	/**
+	 * 
+	 * generates an error message and saves it to the error log file in the backup folder
+	 * @param errorDetails - the details of the error that occured
+	 */
 	private void errorLog(String errorDetails)
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -583,8 +655,15 @@ public class RatingSystem
 		} catch (IOException e) {
 		}
 	}
+	
+	/**
+	 * writes the contents of the members file to the backup file.
+	 * if an error occurs in loading then the files will be switched and so a complete and 
+	 * working backup has been made
+	 *
+	 */
 
-	private void backupMembers() throws IOException
+	private void backupMembers()
 	{
 		File membersSource = new File(loadMembersLocation);
 		File membersDest = new File(loadBackupMembersLocation);
@@ -632,21 +711,9 @@ public class RatingSystem
 		this.loggedIn = loggedIn;
 	}
 
-
-	public String getLoadMembersLocation() {
-		return loadMembersLocation;
-	}
-
-
 	public void setLoadMembersLocation(String loadMembersLocation) {
 		this.loadMembersLocation = loadMembersLocation;
 	}
-
-
-	public String getLoadFilmsLocation() {
-		return loadFilmsLocation;
-	}
-
 
 	public void setLoadFilmsLocation(String loadFilmsLocation) {
 		this.loadFilmsLocation = loadFilmsLocation;
@@ -657,21 +724,10 @@ public class RatingSystem
 		return ratings;
 	}
 
-	public String getSaveMembersLocation() {
-		return saveMembersLocation;
-	}
-
-
 	public void setSaveMembersLocation(String saveMembersLocation) {
 		this.saveMembersLocation = saveMembersLocation;
 	}
-
-
-	public String getSaveFilmsLocation() {
-		return saveFilmsLocation;
-	}
-
-
+	
 	public void setSaveFilmsLocation(String saveFilmsLocation) {
 		this.saveFilmsLocation = saveFilmsLocation;
 	}
