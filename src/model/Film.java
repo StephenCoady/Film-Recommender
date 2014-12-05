@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-
+/**
+ * model for a film in the rating system
+ * @author Stephen
+ *
+ */
 
 public class Film 
 {

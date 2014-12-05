@@ -21,6 +21,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import controller.RatingSystem;
 
+/**
+ * a class to call the initial log in or sign up window
+ * 
+ * @author Stephen
+ *
+ */
 public class LogInController implements Initializable
 {	
 	@FXML

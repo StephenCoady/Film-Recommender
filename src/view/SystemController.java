@@ -30,6 +30,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import controller.RatingSystem;
 
+/**
+ * 
+ * GUI for the Rating Sytem class. uses JAVAFX controllers and fxml.
+ * @author Stephen
+ *
+ */
 public class SystemController implements Initializable
 {	
 	@FXML private TabPane tabPane = new TabPane();
@@ -127,6 +133,12 @@ public class SystemController implements Initializable
 
 	private int loggedInIndex;
 
+	/**
+	 * 
+	 * constructor which simply takes in the index number 
+	 * of the member that has logged in
+	 * @param loggedInIndex
+	 */
 	public SystemController(int loggedInIndex) 
 	{
 		this.loggedInIndex = loggedInIndex;
@@ -150,6 +162,10 @@ public class SystemController implements Initializable
 		filmChoiceRating.show();
 	}
 
+	/**
+	 * allows the member to change all of their details
+	 * @param event
+	 */
 	@FXML
 	private void changeDetails(MouseEvent event)
 	{
@@ -191,6 +207,10 @@ public class SystemController implements Initializable
 		yearChange.clear();
 	}
 
+	/**
+	 * searches for a film by title and populates the list of films
+	 * @param event
+	 */
 	@FXML
 	private void searchByTitle(MouseEvent event)
 	{
@@ -222,6 +242,10 @@ public class SystemController implements Initializable
 		}
 	}
 
+	/**
+	 * allows the user to select the film and then perform an action on that film
+	 * @param event
+	 */
 	@FXML
 	private void selectFilm(MouseEvent event)
 	{
@@ -250,6 +274,10 @@ public class SystemController implements Initializable
 		}
 	}
 
+	/**
+	 * shows the selected film in the designated window
+	 * @param event
+	 */
 	@FXML
 	private void showSelectedFilm(MouseEvent event)
 	{
@@ -291,6 +319,10 @@ public class SystemController implements Initializable
 		}
 	}
 
+	/**
+	 * allows the user to rate the film they have selected
+	 * @param event
+	 */
 	@FXML
 	private void rateSelectedFilm(MouseEvent event)
 	{
@@ -314,6 +346,10 @@ public class SystemController implements Initializable
 		}
 	}
 
+	/**
+	 * allows the user to search by genre
+	 * @param event
+	 */
 	@FXML
 	private void searchByGenre(MouseEvent event)
 	{
@@ -345,6 +381,11 @@ public class SystemController implements Initializable
 		}
 	}
 
+	/**
+	 * this method finds a film from the list of films
+	 * @param filmName the name of the desired film to find
+	 * @return
+	 */
 	private Film findFilm(String filmName)
 	{
 		Film film = null;
@@ -362,6 +403,10 @@ public class SystemController implements Initializable
 		return film;
 	}
 
+	/**
+	 * rates a film
+	 * @param event
+	 */
 	@FXML
 	private void rateFilm(MouseEvent event)
 	{
@@ -384,6 +429,10 @@ public class SystemController implements Initializable
 		}
 	}
 
+	/**
+	 * 
+	 * sorts all films by both title and year
+	 */
 	@FXML
 	private void sortAllFilms()
 	{
@@ -576,6 +625,9 @@ public class SystemController implements Initializable
 		selectionModel.select(6);
 	}
 
+	/**
+	 * tears down the program on logout so as not to cause duplicates upon lo
+	 */
 	private void tearDown()
 	{
 		r.getMembers().clear();

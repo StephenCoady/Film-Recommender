@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * model for a rating in the rating system
+ * @author Stephen
+ *
+ */
 public class Rating 
 {
 	private int rating;

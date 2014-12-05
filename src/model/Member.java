@@ -2,7 +2,11 @@ package model;
 
 import java.util.HashMap;
 
-
+/**
+ * model for a member in the rating system
+ * @author Stephen
+ *
+ */
 public class Member 
 {
 	private String firstName;

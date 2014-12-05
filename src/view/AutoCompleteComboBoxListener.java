@@ -7,6 +7,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * a class to construct o combination box which allows for dropdown search.
+ * 
+ * @author Unknown
+ *
+ * @param <T>
+ */
 @SuppressWarnings("rawtypes")
 public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
 

@@ -11,7 +11,11 @@ import org.junit.Test;
 import controller.RatingSystem;
 
 
-
+/**
+ * test class for the rating system
+ * @author Stephen
+ *
+ */
 public class RatingSystemTester 
 {
 
